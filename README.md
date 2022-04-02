@@ -1,46 +1,74 @@
-# Getting Started with Create React App
+## Learning ProseMirror
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[ProseMirror](https://prosemirror.net/) is a collection of open-sourced libraries which provides the utilities for rich text editing.
 
-## Available Scripts
+## Why ProseMirror?
 
-In the project directory, you can run:
+- It's free & open-sourced.
+- It has [well-documented](https://prosemirror.net/docs/guide/#doc) APIs.
+- It has [active community support](https://discuss.prosemirror.net/).
+- It supports [collaborative editing](https://prosemirror.net/docs/guide/#collab).
+- It's is [designed](https://marijnhaverbeke.nl/blog/prosemirror-1.html) to support modern editor featured. Such as collaborative editing, custom rich contents...etc.
 
-### `npm start`
+## Core Data Structures
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Schema
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+A [schema](https://prosemirror.net/docs/guide/#schema) defined the supported contents in the editor. The simplest schema could be the one that only supports plain text. In Notebooks, it uses the schema that supports `list`, `table`, `image`, `video`, `rurbic-card`...etc.
 
-### `npm test`
+Different products that want to build different kind of editors that support their own specific needs. For example, we have different editors for comments and students work.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### EditorState
 
-### `npm run build`
+- The serializable [state](https://prosemirror.net/docs/ref/#state.EditorState) of the editor which renders the state.
+- It's immutable and read-only.
+- It contains the [selection](https://prosemirror.net/docs/ref/#state.EditorState.selection) and [the root node](https://prosemirror.net/docs/ref/#model.Node) of the document.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+A state can be created from raw JSON blob:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```typescript
+const editorState = EditorState.create({
+  doc: schema.nodeFromJSON(json),
+  schema: schema,
+});
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Or it can be created by applying [transform](https://prosemirror.net/docs/guide/#transform)
 
-### `npm run eject`
+```typescript
+const editorState = previousEditorState.apply(transform);
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Transform
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Most editing features could be handled by writing codes that handle [transform](https://prosemirror.net/docs/guide/#transform). A transform defines sequential steps of how to update editor state.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+For example, applying a transform to an editor state will generate a new editor state.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```typescript
+let transform = editorState.tr;
+transform = formatTextColor(transform, "#222");
+transform = insertText(transform, "hello");
+const nextEditorState = editorState.apply(transform);
+```
 
-## Learn More
+## Build your your first editor.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+ProseMirror does not provide any UI, so we need to build the UI and all the interactions from scratch.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Create schema.
+2. Create editor state.
+3. Create editor view.
+4. Add basic editing plugins (e.g. history)
+5. Add basic keyboard shorts bindings (e.g. undo, redo, new line...etc).
+
+## Advance editor features.
+
+1. Add plugin for text caret.
+2. Add transform to modify document.
+
+---
+
+# Developer Guide
+
+1. This app is created with [create-react-app](https://github.com/facebook/create-react-app). Please read its instruction if needed.

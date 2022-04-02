@@ -17,7 +17,7 @@ const ParagraphNodeSpec: NodeSpec = {
   ],
   toDOM: (node: Node) => {
     const attrs = {
-      class: "border border-gray-50 m-2",
+      class: "border border-1 border-gray-500 m-2",
     };
     return ["p", attrs, 0];
   },
