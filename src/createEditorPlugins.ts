@@ -5,6 +5,8 @@ import { keymap } from "prosemirror-keymap";
 import { baseKeymap } from "prosemirror-commands";
 import createEditorKeyMap from "./createEditorKeyMap";
 import textCaretPlugin from "./textCaretPlugin";
+import createInputRules from "./createInputRules";
+import selectActionMenuPlugin from "./selectActionMenuPlugin";
 
 export default function createEditorPlugins(): Array<Plugin> {
   return [
@@ -16,5 +18,9 @@ export default function createEditorPlugins(): Array<Plugin> {
     keymap(createEditorKeyMap()),
     //
     textCaretPlugin(),
+    //
+    createInputRules(),
+    //
+    selectActionMenuPlugin(),
   ];
 }

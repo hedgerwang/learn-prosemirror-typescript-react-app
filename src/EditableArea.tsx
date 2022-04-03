@@ -41,41 +41,14 @@ export default function EditableArea(props: Props) {
       }
 
       dom.className +=
-        " bg-white border border-1 break-all h-full m-auto shadow mx-auto outline-none overflow-auto p-6 text-base w-full";
+        " bg-white border border-1 break-all h-full m-auto mx-auto" +
+        " outline-none overflow-auto p-6 shadow text-base w-full" +
+        " whitespace-pre-wrap";
 
       dom.style.cssText = "max-width: 210mm;";
 
-      let focusTimer = 0;
-
-      const onFocus = () => {
-        focusTimer && window.clearTimeout(focusTimer);
-        focusTimer = window.setTimeout(() => {
-          focusTimer = 0;
-          // This will inform `textCaretPlugin()` to display UI.
-          const tr = editorView.state.tr.setMeta("action", "focus");
-          onTransactionRef.current(tr);
-        }, 100);
-      };
-
-      const onBlur = () => {
-        focusTimer && window.clearTimeout(focusTimer);
-        focusTimer = window.setTimeout(() => {
-          focusTimer = 0;
-          // This will inform `textCaretPlugin()` to hide UI.
-          const tr = editorView.state.tr.setMeta("action", "blur");
-          onTransactionRef.current(tr);
-        }, 100);
-      };
-
-      dom.addEventListener("focusin", onFocus, true);
-      dom.addEventListener("focusout", onBlur, true);
-
       editorView.focus();
       return () => {
-        clearTimeout(focusTimer);
-        focusTimer = 0;
-        dom.removeEventListener("focusin", onFocus, true);
-        dom.removeEventListener("focusout", onBlur, true);
         editorView.destroy();
         editorViewRef.current = null;
       };

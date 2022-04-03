@@ -1,12 +1,12 @@
 // @flow
-
 import {
   Plugin,
   Transaction,
   TextSelection,
   EditorState,
 } from "prosemirror-state";
-import { Decoration, DecorationSet } from "prosemirror-view";
+import { Decoration, DecorationSet, EditorView } from "prosemirror-view";
+import EditorViewPlugin from "./EditorViewPlugin";
 
 const DECO_TYPE = "text-caret";
 
@@ -38,30 +38,36 @@ function findSpec(spec: any) {
 }
 
 export default function textCaretPlugin(): Plugin {
-  return new Plugin({
+  const plugin = new EditorViewPlugin({
     state: {
       init: () => {
         return DecorationSet.empty;
       },
 
       apply(tr: Transaction, set: DecorationSet): DecorationSet {
-        const action = tr.getMeta("action");
+        const { editorView } = plugin;
+        const focused = editorView ? editorView.hasFocus() : false;
+        const decos = set.find(undefined, undefined, findSpec);
 
-        if (action === "focus") {
-          const decos = set.find(undefined, undefined, findSpec);
-          // Remove existing decorations.
-          return set.remove(decos);
-        } else if (action === "blur") {
+        if (!focused && decos.length === 1) {
+          // Text caret is visible.
+          return set;
+        }
+
+        if (focused) {
+          // Editor has focus.
+          // Clear text caret.
+          set = set.remove(decos);
+        } else {
+          // Editor lost focus.
           const { selection } = tr;
           if (selection instanceof TextSelection) {
+            // Show text caret.
             const { to } = selection;
-            // Apply new decorations.
             const newDeco = Decoration.widget(to, createElement(), {
               type: DECO_TYPE,
             });
-            return set.add(tr.doc, [newDeco]);
-          } else {
-            return set;
+            set = set.add(tr.doc, [newDeco]);
           }
         }
 
@@ -70,13 +76,27 @@ export default function textCaretPlugin(): Plugin {
     },
     props: {
       decorations(state: EditorState): DecorationSet | null {
-        const plugin: Plugin = this;
-        if (plugin instanceof Plugin) {
-          return plugin.getState(state);
-        } else {
-          return null;
-        }
+        return plugin.getState(state);
+      },
+      handleDOMEvents: {
+        focus(view: EditorView) {
+          const { blurTimer } = plugin;
+          plugin.editorView = view;
+          blurTimer && window.clearTimeout(blurTimer);
+          return false;
+        },
+        blur(view: EditorView) {
+          const { blurTimer } = plugin;
+          blurTimer && window.clearTimeout(blurTimer);
+          plugin.editorView = view;
+          plugin.blurTimer = window.setTimeout(() => {
+            const tr = view.state.tr.setMeta("action", "show-text-caret");
+            view.dispatch(tr);
+          }, 100);
+          return false;
+        },
       },
     },
   });
+  return plugin;
 }

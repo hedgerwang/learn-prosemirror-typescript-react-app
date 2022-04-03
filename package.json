@@ -53,6 +53,7 @@
   "devDependencies": {
     "@types/prosemirror-commands": "^1.0.4",
     "@types/prosemirror-history": "^1.0.3",
+    "@types/prosemirror-inputrules": "^1.0.4",
     "@types/prosemirror-keymap": "^1.0.4",
     "@types/prosemirror-state": "^1.2.8"
   },

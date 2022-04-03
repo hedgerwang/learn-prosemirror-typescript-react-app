@@ -18,8 +18,8 @@ export default function RedoButton(props: {
   const className = cx(BUTTON, "block my-2", { [BUTTON_DISABLED]: disabled });
 
   const onClick = useCallback(() => {
-    editorState && redo(editorState, onTransaction);
     editorView && editorView.focus();
+    editorState && redo(editorState, onTransaction);
   }, [editorState, editorView, onTransaction]);
 
   return (

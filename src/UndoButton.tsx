@@ -18,8 +18,8 @@ export default function UndoButton(props: {
   const className = cx(BUTTON, "block my-2", { [BUTTON_DISABLED]: disabled });
 
   const onClick = useCallback(() => {
-    editorState && undo(editorState, onTransaction);
     editorView && editorView.focus();
+    editorState && undo(editorState, onTransaction);
   }, [editorState, editorView, onTransaction]);
 
   return (
