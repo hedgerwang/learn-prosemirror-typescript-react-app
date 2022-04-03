@@ -47,7 +47,7 @@ For example, applying a transform to an editor state will generate a new editor 
 
 ```typescript
 let transform = editorState.tr;
-transform = formatTextColor(transform, "#222");
+transform = formatTextHighlightColor(transform, "#222");
 transform = insertText(transform, "hello");
 const nextEditorState = editorState.apply(transform);
 ```

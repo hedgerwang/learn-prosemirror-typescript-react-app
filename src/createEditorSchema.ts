@@ -4,6 +4,7 @@ import { Schema } from "prosemirror-model";
 import DocNodeSpec from "./DocNodeSpec";
 import ParagraphNodeSpec from "./ParagraphNodeSpec";
 import TextNodeSpec from "./TextNodeSpec";
+import TextHighlightColorMarkSpec from "./TextHighlightColorMarkSpec";
 
 export default function createEditorSchema(): Schema {
   return new Schema({
@@ -12,6 +13,8 @@ export default function createEditorSchema(): Schema {
       paragraph: ParagraphNodeSpec,
       text: TextNodeSpec,
     },
-    marks: {},
+    marks: {
+      textHighlightColor: TextHighlightColorMarkSpec,
+    },
   });
 }

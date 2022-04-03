@@ -31,12 +31,19 @@ export default function EditableArea(props: Props) {
         dispatchTransaction: (tr) => onTransactionRef.current(tr),
         state: editorStateRef.current,
       });
-      editorView.dom.className +=
-        " border border-1 h-full outline-none overflow-auto p-4 text-base w-full break-all";
+
       editorViewRef.current = editorView;
       onReadyRef.current(editorView);
 
       const { dom } = editorView;
+      if (!(dom instanceof HTMLElement)) {
+        throw new Error("bad dom");
+      }
+
+      dom.className +=
+        " bg-white border border-1 break-all h-full m-auto shadow mx-auto outline-none overflow-auto p-6 text-base w-full";
+
+      dom.style.cssText = "max-width: 210mm;";
 
       let focusTimer = 0;
 
@@ -47,7 +54,7 @@ export default function EditableArea(props: Props) {
           // This will inform `textCaretPlugin()` to display UI.
           const tr = editorView.state.tr.setMeta("action", "focus");
           onTransactionRef.current(tr);
-        });
+        }, 100);
       };
 
       const onBlur = () => {
@@ -57,7 +64,7 @@ export default function EditableArea(props: Props) {
           // This will inform `textCaretPlugin()` to hide UI.
           const tr = editorView.state.tr.setMeta("action", "blur");
           onTransactionRef.current(tr);
-        });
+        }, 100);
       };
 
       dom.addEventListener("focusin", onFocus, true);
@@ -88,5 +95,5 @@ export default function EditableArea(props: Props) {
     }
   }, [editorState]);
 
-  return <div className="flex flex-1 content" ref={elementRef} />;
+  return <div className="content flex flex-1" ref={elementRef} />;
 }

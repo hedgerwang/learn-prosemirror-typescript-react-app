@@ -1,13 +1,15 @@
 // @flow
 import { EditorState, Transaction } from "prosemirror-state";
-import { useCallback, useState } from "react";
-import EditableArea from "./EditableArea";
-import UndoButton from "./UndoButton";
-import RedoButton from "./RedoButton";
-import createEditorState from "./createEditorState";
-import createEditorSchema from "./createEditorSchema";
-import createEditorPlugins from "./createEditorPlugins";
 import { EditorView } from "prosemirror-view";
+import { useCallback, useState } from "react";
+import createEditorPlugins from "./createEditorPlugins";
+import createEditorSchema from "./createEditorSchema";
+import createEditorState from "./createEditorState";
+import EditableArea from "./EditableArea";
+import RedoButton from "./RedoButton";
+import TextHighlightColorSelector from "./TextHighlightColorSelector";
+import UndoButton from "./UndoButton";
+import applyTransaction from "./applyTransaction";
 
 function createInitialEditorState() {
   const schema = createEditorSchema();
@@ -19,16 +21,17 @@ export default function App() {
   const [editorState, setEditorState] = useState<EditorState>(
     createInitialEditorState
   );
+
   const [editorView, setEditorView] = useState<EditorView | null>(null);
 
   const onTransaction = useCallback(
-    (tr: Transaction) => setEditorState(editorState.apply(tr)),
+    (tr: Transaction) => setEditorState(applyTransaction(editorState, tr)),
     [editorState, setEditorState]
   );
 
   return (
-    <div className="box-border flex flex-row p-6 h-screen bg-gray-50">
-      <div className="border border-gray-50 flex flex-row flex-1">
+    <div className="bg-gray-100 box-border flex flex-row h-screen p-6">
+      <div className="border border-gray-50 flex flex-1 flex-row">
         <EditableArea
           editorState={editorState}
           onReady={setEditorView}
@@ -36,7 +39,7 @@ export default function App() {
         />
       </div>
       <div className="w-6" />
-      <div className="border border-gray-50 flex flex-col p-4 w-max">
+      <div className="border border-gray-50 flex flex-col p-4 w-max overflow-auto">
         <UndoButton
           editorState={editorState}
           editorView={editorView}
@@ -47,6 +50,22 @@ export default function App() {
           editorView={editorView}
           onTransaction={onTransaction}
         />
+        <TextHighlightColorSelector
+          editorState={editorState}
+          editorView={editorView}
+          onTransaction={onTransaction}
+        />
+        [Comments Bank]
+        <hr />
+        [Input Section]
+        <hr />
+        [Input Section]
+        <hr />
+        [Input Section]
+        <hr />
+        [Input Section]
+        <hr />
+        [Input Section]
       </div>
     </div>
   );

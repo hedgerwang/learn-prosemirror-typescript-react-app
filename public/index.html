@@ -31,10 +31,18 @@
 </body>
 <script src="//cdn.tailwindcss.com"></script>
 <style>
+  :root {
+    font-size: 16px;
+  }
+
   /* Workaround to fix the broken layout while displaying custom */
   /* text caret with `textCaretPlugin()` */
   .ProseMirror-separator {
     display: none;
+  }
+
+  .ProseMirror {
+    caret-color: #000;
   }
 </style>
 

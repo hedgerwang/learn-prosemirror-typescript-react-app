@@ -11,10 +11,11 @@ const EMPTY_DOC_JSON = {
 
 export default function createEditorState(
   schema: Schema,
-  plugins: Array<Plugin>
+  plugins: Array<Plugin>,
+  json?: Object | null | typeof undefined
 ): EditorState {
   return EditorState.create({
-    doc: schema.nodeFromJSON(EMPTY_DOC_JSON),
+    doc: schema.nodeFromJSON(json || EMPTY_DOC_JSON),
     schema,
     plugins,
   });
