@@ -2,8 +2,7 @@
 
 import { EditorState, Transaction } from "prosemirror-state";
 import { InputRule } from "prosemirror-inputrules";
-
-export const INPUT_RULE_ACTION_NAME = "selection-action-input";
+import { SHOW_ACTION_MENU } from "./EditorActionMenu";
 
 function handleActionInputRule(
   state: EditorState,
@@ -15,11 +14,11 @@ function handleActionInputRule(
   if (token !== "/") {
     return null;
   }
-  let tr = state.tr.setMeta("action", INPUT_RULE_ACTION_NAME);
+  let tr = state.tr.setMeta("action", { [SHOW_ACTION_MENU]: true });
   tr.insertText(token, end);
   return tr;
 }
 
-export default function selectActionInputRule(): InputRule {
+export default function editorActionInputRule(): InputRule {
   return new InputRule(/\/+$/, handleActionInputRule);
 }
