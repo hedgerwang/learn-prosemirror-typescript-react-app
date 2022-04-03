@@ -7,8 +7,8 @@ import drawColorGradient from "./drawColorGradient";
 import getEventOffset from "./getEventOffset";
 import useActiveTextHighlightColor from "./useActiveTextHighlightColor";
 
-const WIDTH = 200;
-const HEIGHT = 50;
+const WIDTH = 300;
+const HEIGHT = 100;
 
 export default function TextHighlightColorSelector(props: {
   editorState: EditorState;
@@ -50,14 +50,14 @@ export default function TextHighlightColorSelector(props: {
   );
 
   return (
-    <div className="bg-white border border-1 my-2 rounded shadow-sm">
+    <div className="bg-white border border-1 my-2 rounded shadow-sm overflow-hidden">
       <label className="block">
-        <span className="block font-bold px-2 py-2">
+        <span className="block font-bold px-2 py-2 bg-gray-800">
           <span
-            className="align-middle border-1 h-3 inline-block mx-2 rounded shadow w-3"
+            className="align-middle border-1 h-5 inline-block mx-2 rounded shadow w-5"
             style={{ backgroundColor: activeColor }}
           />
-          Highlight Color
+          <span className="text-white">highlight color</span>
         </span>
 
         <button

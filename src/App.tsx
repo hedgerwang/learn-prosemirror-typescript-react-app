@@ -10,6 +10,7 @@ import RedoButton from "./RedoButton";
 import TextHighlightColorSelector from "./TextHighlightColorSelector";
 import UndoButton from "./UndoButton";
 import applyTransaction from "./applyTransaction";
+import CommentsBankSelector from "./CommentsBankSelector";
 
 function createInitialEditorState() {
   const schema = createEditorSchema();
@@ -55,17 +56,11 @@ export default function App() {
           editorView={editorView}
           onTransaction={onTransaction}
         />
-        [Comments Bank]
-        <hr />
-        [Input Section]
-        <hr />
-        [Input Section]
-        <hr />
-        [Input Section]
-        <hr />
-        [Input Section]
-        <hr />
-        [Input Section]
+        <CommentsBankSelector
+          editorState={editorState}
+          editorView={editorView}
+          onTransaction={onTransaction}
+        />
       </div>
     </div>
   );

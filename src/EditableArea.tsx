@@ -41,8 +41,8 @@ export default function EditableArea(props: Props) {
       }
 
       dom.className +=
-        " bg-white border border-1 break-all h-full m-auto mx-auto" +
-        " outline-none overflow-auto p-6 shadow text-base w-full" +
+        " bg-white border border-1 break-all min-h-full m-auto mx-auto" +
+        " outline-none p-6 shadow text-base w-full" +
         " whitespace-pre-wrap";
 
       dom.style.cssText = "max-width: 210mm;";

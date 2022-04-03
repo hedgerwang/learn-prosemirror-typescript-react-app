@@ -1,64 +1,107 @@
 // @flow
-import { redo, redoDepth } from "prosemirror-history";
-import { EditorState, Transaction } from "prosemirror-state";
-import { EditorView } from "prosemirror-view";
-import { useCallback, useEffect, useRef } from "react";
-import cx from "classnames";
-import { BUTTON, BUTTON_DISABLED } from "./styles";
 
-export default function EditorActionMenu(props: { editorView: EditorView }) {
-  const { editorView } = props;
-  const elRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const el = elRef.current;
-      if (el) {
-        const button = el.querySelector("button");
-        button && button.focus();
-      }
+import { EditorView } from "prosemirror-view";
+import { useCallback, useRef } from "react";
+import { SHOW_COMMENTS_BANK_MENU } from "./CommentsBankMenu";
+import useFocusBoundary from "./useFocusBoundary";
+
+export const SHOW_ACTION_MENU = "show_action_menu";
+export const HIDE_ACTION_MENU = "hide_action_menu";
+
+function MenuItem(props: {
+  editorView: EditorView;
+  label: string;
+  action: string;
+}) {
+  const { label, action, editorView } = props;
+
+  const onClick = useCallback(() => {
+    editorView.focus();
+    let tr = editorView.state.tr.setMeta("action", {
+      [HIDE_ACTION_MENU]: true,
+      [action]: true,
     });
-    return () => clearTimeout(timer);
-  }, []);
+    // Delete the starting "/" character that opens the menu.
+    tr = tr.deleteRange(tr.selection.to - 1, tr.selection.to);
+    // Insert space character.
+    tr = tr.insertText(" ");
+    editorView.dispatch(tr);
+  }, [action, editorView]);
 
   const onKeyDown = useCallback(
-    (e: any) => {
+    (e) => {
+      e.preventDefault();
       const { key, target } = e;
-      let nextFocusEl;
-      let action = "close-action-menu";
-      if (target instanceof HTMLButtonElement) {
-        if (key === "ArrowDown" || key === "ArrowRight") {
-          nextFocusEl = target.nextElementSibling;
-          e.preventDefault();
-        } else if (key === "ArrowUp" || key === "ArrowLeft") {
-          nextFocusEl = target.previousElementSibling;
-          e.preventDefault();
-        } else if (key === "Enter") {
-          e.preventDefault();
-          // perform action.
-        }
-      }
-
-      if (nextFocusEl instanceof HTMLButtonElement) {
-        nextFocusEl.focus();
-        e.stopPropagation();
+      const { nextElementSibling, previousElementSibling } = target;
+      if (
+        key === "ArrowDown" &&
+        nextElementSibling instanceof HTMLButtonElement
+      ) {
+        nextElementSibling.focus();
+      } else if (
+        key === "ArrowUp" &&
+        previousElementSibling instanceof HTMLButtonElement
+      ) {
+        previousElementSibling.focus();
+      } else if (key === "Enter") {
+        target.click();
       } else {
         editorView.focus();
-        const tr = editorView.state.tr.setMeta("action", action);
-        editorView.dispatch(tr);
       }
     },
     [editorView]
   );
   return (
+    <button
+      onClick={onClick}
+      style={{ marginBottom: "1px" }}
+      onKeyDown={onKeyDown}
+      className="block break-all px-4 py-1
+        focus:bg-blue-600
+        hover:bg-blue-600
+        outline-none
+        text-left whitespace-nowrap
+        text-white
+        rounded-lg
+        w-full"
+    >
+      {label}
+    </button>
+  );
+}
+
+export default function EditorActionMenu(props: { editorView: EditorView }) {
+  const { editorView } = props;
+  const elRef = useRef<HTMLDivElement | null>(null);
+
+  const onFocusLeave = useCallback(() => {
+    const tr = editorView.state.tr.setMeta("action", {
+      [HIDE_ACTION_MENU]: true,
+    });
+    editorView.dispatch(tr);
+  }, [editorView]);
+
+  useFocusBoundary(elRef, { autoFocus: true, onFocusLeave });
+
+  return (
     <div
-      className="absolute bg-white left-0 p-4 shadow top-0 flex flex-col"
+      className="absolute bg-gray-900 border border-2 border-gray-200 left-0 overflow-hidden p-2 rounded-md shadow-xl text-sm text-white top-0"
       tabIndex={-1}
       ref={elRef}
-      onKeyDown={onKeyDown}
     >
-      <button className={BUTTON}>AAA</button>
-      <button className={BUTTON}>AAA</button>
-      <button className={BUTTON}>AAA</button>
+      <div className="px-2 py-1 font-bold whitespace-nowrap">
+        Quick actions...
+      </div>
+      <MenuItem
+        label="Insert text from comments bank"
+        action={SHOW_COMMENTS_BANK_MENU}
+        editorView={editorView}
+      />
+      <MenuItem
+        label="Upload image"
+        action="upload-image"
+        editorView={editorView}
+      />
     </div>
   );
 }

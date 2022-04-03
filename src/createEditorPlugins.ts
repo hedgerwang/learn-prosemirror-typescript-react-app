@@ -6,21 +6,24 @@ import { baseKeymap } from "prosemirror-commands";
 import createEditorKeyMap from "./createEditorKeyMap";
 import textCaretPlugin from "./textCaretPlugin";
 import createInputRules from "./createInputRules";
-import selectActionMenuPlugin from "./selectActionMenuPlugin";
+import editorActionMenuPlugin from "./editorActionMenuPlugin";
+import commentsBankMenuPlugin from "./commentsBankMenuPlugin";
 
 export default function createEditorPlugins(): Array<Plugin> {
   return [
-    // record edits
+    //
+    commentsBankMenuPlugin(),
+    //
     history(),
-    // xxx
+    //
     keymap(baseKeymap),
-    // ...
+    //
     keymap(createEditorKeyMap()),
     //
     textCaretPlugin(),
     //
     createInputRules(),
     //
-    selectActionMenuPlugin(),
+    editorActionMenuPlugin(),
   ];
 }
