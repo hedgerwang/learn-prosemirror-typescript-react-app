@@ -86,16 +86,6 @@ export default function editorActionMenuPlugin(): Plugin {
       decorations(state: EditorState): DecorationSet | null {
         return plugin.getState(state);
       },
-      // handleDOMEvents: {
-      //   focusin(v: EditorView) {
-      //     console.log(">>>>in");
-      //     return true;
-      //   },
-      //   focusout(v: EditorView) {
-      //     console.log(">>>>blur");
-      //     return true;
-      //   },
-      // },
     },
   });
   return plugin;

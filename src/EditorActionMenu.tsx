@@ -17,7 +17,6 @@ function MenuItem(props: {
 
   const onClick = useCallback(() => {
     editorView.focus();
-<<<<<<< HEAD
     let tr = editorView.state.tr.setMeta("action", {
       [HIDE_ACTION_MENU]: true,
       [action]: true,
@@ -26,12 +25,6 @@ function MenuItem(props: {
     tr = tr.deleteRange(tr.selection.to - 1, tr.selection.to);
     // Insert space character.
     tr = tr.insertText(" ");
-=======
-    const tr = editorView.state.tr.setMeta("action", {
-      [HIDE_ACTION_MENU]: true,
-      [action]: true,
-    });
->>>>>>> d1ce042d4f3b1f7d699b5aacc4d815e9e78bd60d
     editorView.dispatch(tr);
   }, [action, editorView]);
 
@@ -63,7 +56,6 @@ function MenuItem(props: {
       onClick={onClick}
       style={{ marginBottom: "1px" }}
       onKeyDown={onKeyDown}
-<<<<<<< HEAD
       className="block break-all px-4 py-1
         focus:bg-blue-600
         hover:bg-blue-600
@@ -71,15 +63,6 @@ function MenuItem(props: {
         text-left whitespace-nowrap
         text-white
         rounded-lg
-=======
-      className="block break-all px-4 py-2
-        bg-gray-500
-        text-white
-        text-left whitespace-nowrap
-        hover:bg-gray-600
-        focus:bg-gray-600
-        pl-8
->>>>>>> d1ce042d4f3b1f7d699b5aacc4d815e9e78bd60d
         w-full"
     >
       {label}
@@ -102,7 +85,6 @@ export default function EditorActionMenu(props: { editorView: EditorView }) {
 
   return (
     <div
-<<<<<<< HEAD
       className="absolute bg-gray-900 border border-2 border-gray-200 left-0 overflow-hidden p-2 rounded-md shadow-xl text-sm text-white top-0"
       tabIndex={-1}
       ref={elRef}
@@ -112,22 +94,10 @@ export default function EditorActionMenu(props: { editorView: EditorView }) {
       </div>
       <MenuItem
         label="Insert math comments"
-=======
-      className="absolute bg-white border left-0 overflow-hidden rounded shadow top-0"
-      tabIndex={-1}
-      ref={elRef}
-    >
-      <div className="px-4 py-2 font-bold border-b bg-gray-200 whitespace-nowrap">
-        Quick actions...
-      </div>
-      <MenuItem
-        label="Insert text from comments bank"
->>>>>>> d1ce042d4f3b1f7d699b5aacc4d815e9e78bd60d
         action={SHOW_COMMENTS_BANK_MENU}
         editorView={editorView}
       />
       <MenuItem
-<<<<<<< HEAD
         label="Insert cogskill comments"
         action={SHOW_COMMENTS_BANK_MENU}
         editorView={editorView}
@@ -140,10 +110,6 @@ export default function EditorActionMenu(props: { editorView: EditorView }) {
       <MenuItem
         label="Insert final product comments"
         action={SHOW_COMMENTS_BANK_MENU}
-=======
-        label="Upload image"
-        action="upload-image"
->>>>>>> d1ce042d4f3b1f7d699b5aacc4d815e9e78bd60d
         editorView={editorView}
       />
     </div>
