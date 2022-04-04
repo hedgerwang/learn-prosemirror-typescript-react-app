@@ -3,6 +3,7 @@
 import { EditorState, Transaction } from "prosemirror-state";
 import { EditorView } from "prosemirror-view";
 import { useEffect, useRef } from "react";
+import applyDevTools from "prosemirror-dev-tools";
 
 type Props = {
   editorState: EditorState;
@@ -48,6 +49,8 @@ export default function EditableArea(props: Props) {
       dom.style.cssText = "max-width: 210mm;";
 
       editorView.focus();
+
+      applyDevTools(editorView);
       return () => {
         editorView.destroy();
         editorViewRef.current = null;
