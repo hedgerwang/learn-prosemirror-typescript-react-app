@@ -32,8 +32,8 @@ export default function App() {
   );
 
   return (
-    <div className="bg-gray-100 box-border flex flex-row h-screen p-6">
-      <div className="border border-gray-50 flex flex-1 flex-row">
+    <div className="bg-gray-200 box-border flex flex-row h-screen p-6">
+      <div className="flex flex-1 flex-row">
         <EditableArea
           editorState={editorState}
           onReady={setEditorView}
@@ -41,7 +41,7 @@ export default function App() {
         />
       </div>
       <div className="w-6" />
-      <div className="border border-gray-50 flex flex-col p-4 w-max overflow-auto">
+      <div className="flex flex-col p-4 w-max overflow-auto">
         <UndoButton
           editorState={editorState}
           editorView={editorView}
