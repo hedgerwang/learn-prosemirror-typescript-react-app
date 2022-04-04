@@ -10,12 +10,11 @@ export default function UndoButton(props: {
   editorView: EditorView | null;
   editorState: EditorState;
   onTransaction: (tr: Transaction) => void;
+  className?: string | null | undefined;
 }) {
-  const { editorState, editorView, onTransaction } = props;
-
+  const { editorState, editorView, onTransaction, className } = props;
   const disabled = !editorState || undoDepth(editorState) === 0;
-
-  const className = cx(BUTTON, "block my-2", { [BUTTON_DISABLED]: disabled });
+  const classNames = cx(BUTTON, { [BUTTON_DISABLED]: disabled }, className);
 
   const onClick = useCallback(() => {
     editorView && editorView.focus();
@@ -23,7 +22,7 @@ export default function UndoButton(props: {
   }, [editorState, editorView, onTransaction]);
 
   return (
-    <button className={className} disabled={disabled} onClick={onClick}>
+    <button className={classNames} disabled={disabled} onClick={onClick}>
       Undo
     </button>
   );

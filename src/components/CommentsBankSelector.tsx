@@ -146,7 +146,7 @@ export default function CommentsBankSelector(props: {
   ) : null;
 
   const classNames = cx(
-    "bg-white border-1 flex flex-col my-2 p-4 rounded shadow-sm text-gray-800 w-80 ",
+    "bg-white border-1 flex flex-col my-2 p-4 rounded-md shadow-sm text-gray-800 w-80 ",
     className
   );
 

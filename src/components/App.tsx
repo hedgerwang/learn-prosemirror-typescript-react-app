@@ -6,13 +6,12 @@ import createEditorPlugins from "../createEditorPlugins";
 import createEditorSchema from "../createEditorSchema";
 import createEditorState from "../createEditorState";
 import EditableArea from "./EditableArea";
-import RedoButton from "./RedoButton";
+import TextControls from "./TextControls";
 import TextHighlightColorSelector from "./TextHighlightColorSelector";
-import UndoButton from "./UndoButton";
 import applyTransaction from "../transforms/applyTransaction";
 import CommentsBankSelector from "./CommentsBankSelector";
 import InputSectionPanel from "./InputSectionPanel";
-
+import HistoryControls from "./HistoryControls";
 function createInitialEditorState() {
   const schema = createEditorSchema();
   const plugins = createEditorPlugins();
@@ -42,12 +41,12 @@ export default function App() {
       </div>
       <div className="w-6" />
       <div className="flex flex-col p-4 w-max overflow-auto select-none">
-        <UndoButton
+        <HistoryControls
           editorState={editorState}
           editorView={editorView}
           onTransaction={onTransaction}
         />
-        <RedoButton
+        <TextControls
           editorState={editorState}
           editorView={editorView}
           onTransaction={onTransaction}

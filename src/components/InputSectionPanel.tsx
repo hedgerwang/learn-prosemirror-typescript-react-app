@@ -39,8 +39,8 @@ export default function InputSectionPanel(props: {
   };
 
   return (
-    <div className="bg-white border-1 flex flex-col my-2 my-4 p-4 rounded shadow-sm text-gray-800 w-80 ">
-      <label className="block font-bold mb-2">input section</label>
+    <div className="bg-white border-1 flex flex-col my-2 p-4 rounded-md shadow-sm text-gray-800 w-80 ">
+      <label className="block font-bold">worksheet</label>
 
       <label className="block my-2 py-2 cursor-pointer">
         <input
@@ -52,9 +52,7 @@ export default function InputSectionPanel(props: {
             checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top
             inline-block mx-2"
         />
-        <span className="select-none inline-block">
-          Only allow editing input sections.
-        </span>
+        <span className="select-none inline-block">enable worksheet mode</span>
       </label>
 
       <button
@@ -62,7 +60,7 @@ export default function InputSectionPanel(props: {
         onClick={onInsertInputSection}
         disabled={disabled}
       >
-        Insert input section
+        Add work sheet section
       </button>
     </div>
   );

@@ -50,7 +50,7 @@ export default function TextHighlightColorSelector(props: {
   );
 
   return (
-    <div className="bg-white border border-1 my-2 rounded shadow-sm overflow-hidden">
+    <div className="bg-white border border-1 my-2 rounded-md shadow-sm overflow-hidden">
       <label className="block">
         <span className="block font-bold px-2 py-2 bg-gray-800">
           <span

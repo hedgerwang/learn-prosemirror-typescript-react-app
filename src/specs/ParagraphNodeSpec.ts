@@ -17,7 +17,7 @@ const ParagraphNodeSpec: NodeSpec = {
   ],
   toDOM: (node: Node) => {
     const attrs = {
-      class: "m-2",
+      class: "my-2",
     };
     return ["p", attrs, 0];
   },
