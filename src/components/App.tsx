@@ -67,6 +67,16 @@ export default function App() {
           editorView={editorView}
           onTransaction={onTransaction}
         />
+
+        <div className="mt-4">
+          <a
+            className="text-blue-700 hover:underline text-sm"
+            href="https://github.com/hedgerwang/learn-prosemirror-typescript-react-app"
+            target="new"
+          >
+            &raquo; View the github project
+          </a>
+        </div>
       </div>
     </div>
   );
