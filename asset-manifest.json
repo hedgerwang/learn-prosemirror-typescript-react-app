@@ -1,12 +1,16 @@
 {
   "files": {
-    "main.js": "/learn-prosemirror-typescript-react-app/static/js/main.6b0f6ab2.js",
+    "main.js": "/learn-prosemirror-typescript-react-app/static/js/main.83ed6584.js",
+    "static/js/485.20a03532.chunk.js": "/learn-prosemirror-typescript-react-app/static/js/485.20a03532.chunk.js",
+    "static/js/724.1584e3e2.chunk.js": "/learn-prosemirror-typescript-react-app/static/js/724.1584e3e2.chunk.js",
     "static/js/787.7a54c5bc.chunk.js": "/learn-prosemirror-typescript-react-app/static/js/787.7a54c5bc.chunk.js",
     "index.html": "/learn-prosemirror-typescript-react-app/index.html",
-    "main.6b0f6ab2.js.map": "/learn-prosemirror-typescript-react-app/static/js/main.6b0f6ab2.js.map",
+    "main.83ed6584.js.map": "/learn-prosemirror-typescript-react-app/static/js/main.83ed6584.js.map",
+    "485.20a03532.chunk.js.map": "/learn-prosemirror-typescript-react-app/static/js/485.20a03532.chunk.js.map",
+    "724.1584e3e2.chunk.js.map": "/learn-prosemirror-typescript-react-app/static/js/724.1584e3e2.chunk.js.map",
     "787.7a54c5bc.chunk.js.map": "/learn-prosemirror-typescript-react-app/static/js/787.7a54c5bc.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.6b0f6ab2.js"
+    "static/js/main.83ed6584.js"
   ]
 }
