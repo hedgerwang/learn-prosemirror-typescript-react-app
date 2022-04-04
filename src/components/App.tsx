@@ -41,7 +41,7 @@ export default function App() {
         />
       </div>
       <div className="w-6" />
-      <div className="flex flex-col p-4 w-max overflow-auto">
+      <div className="flex flex-col p-4 w-max overflow-auto select-none">
         <UndoButton
           editorState={editorState}
           editorView={editorView}

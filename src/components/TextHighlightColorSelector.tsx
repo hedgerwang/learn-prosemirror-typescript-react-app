@@ -54,7 +54,7 @@ export default function TextHighlightColorSelector(props: {
       <label className="block">
         <span className="block font-bold px-2 py-2 bg-gray-800">
           <span
-            className="align-middle border-1 h-5 inline-block mx-2 rounded shadow w-5"
+            className="align-middle border-1 h-5 inline-block mx-2 rounded-full shadow w-5"
             style={{ backgroundColor: activeColor }}
           />
           <span className="text-white">highlight color</span>
