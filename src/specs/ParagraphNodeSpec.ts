@@ -18,7 +18,6 @@ const ParagraphNodeSpec: NodeSpec = {
     {
       tag: "p",
       getAttrs: (source) => {
-        console.log("parseDOM P ", source);
         return {};
       },
     },
@@ -35,6 +34,7 @@ const ParagraphNodeSpec: NodeSpec = {
     if (appearance === "checkbox") {
       const cAttrs: { [k: string]: any } = {
         type: "checkbox",
+        name: "paragraph-checkbox",
         class: "mt-1 pt-1 mx-2 w-4 h-4",
       };
       if (checked) {

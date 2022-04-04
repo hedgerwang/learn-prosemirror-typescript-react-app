@@ -22,7 +22,6 @@ const TextHighlightColorMarkSpec: MarkSpec = {
   ],
   toDOM(mark: Mark) {
     const { color } = mark.attrs;
-    console.log(color);
     let style;
     if (color) {
       style = `background-color: ${color};`;

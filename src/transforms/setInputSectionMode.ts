@@ -15,7 +15,6 @@ export default function setInputSectionMode(
   tr: Transaction,
   enabled: boolean
 ): Transaction {
-  console.log(enabled, !!tr.doc.attrs.inputSectionMode);
   if (enabled === !!tr.doc.attrs.inputSectionMode) {
     return tr;
   }

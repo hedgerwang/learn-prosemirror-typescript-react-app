@@ -61,10 +61,6 @@ function isAtCheckboxBlock(state: EditorState): boolean {
   if (!nodePos) {
     return false;
   }
-  console.log(
-    ">> nodePos.node.attrs.appearance",
-    nodePos.node.attrs.appearance
-  );
   return nodePos.node.attrs.appearance === "checkbox";
 }
 
