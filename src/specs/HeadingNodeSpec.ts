@@ -4,7 +4,6 @@ import { Node } from "prosemirror-model";
 import type { NodeSpec } from "prosemirror-model";
 
 function getAttrs(source: any) {
-  console.log(">>>>", source);
   if (source instanceof HTMLElement) {
     const matched = source.nodeName.match(/\d+/);
     if (matched) {
