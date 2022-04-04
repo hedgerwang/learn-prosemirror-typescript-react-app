@@ -62,11 +62,14 @@ export default function App() {
           editorView={editorView}
           onTransaction={onTransaction}
         />
+<<<<<<< HEAD
         <InputSectionPanel
           editorState={editorState}
           editorView={editorView}
           onTransaction={onTransaction}
         />
+=======
+>>>>>>> d1ce042d4f3b1f7d699b5aacc4d815e9e78bd60d
       </div>
     </div>
   );

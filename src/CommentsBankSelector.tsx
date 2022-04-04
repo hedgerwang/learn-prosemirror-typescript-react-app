@@ -45,12 +45,20 @@ function MenuItem(props: {
   useEffect(() => {
     const el = elRef.current;
     if (selected && el) {
+<<<<<<< HEAD
       el.scrollIntoView(false);
+=======
+      el.scrollIntoView();
+>>>>>>> d1ce042d4f3b1f7d699b5aacc4d815e9e78bd60d
     }
   }, [selected]);
 
   return (
+<<<<<<< HEAD
     <li className={selected ? "bg-gray-200" : ""} key={`${text}`}>
+=======
+    <li className={selected ? "bg-gray-100" : ""} key={`${text}`}>
+>>>>>>> d1ce042d4f3b1f7d699b5aacc4d815e9e78bd60d
       <button
         onClick={() => onSubmit(text)}
         ref={elRef}
