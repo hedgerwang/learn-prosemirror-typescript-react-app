@@ -1,4 +1,4 @@
-[DEMO](https://hedgerwang.github.io/learn-prosemirror-typescript-react-app/build/index.html)
+[DEMO](https://hedgerwang.github.io/learn-prosemirror-typescript-react-app/)
 
 ## Learning ProseMirror
 
@@ -20,16 +20,16 @@
 ## Basic Data Flow
 
 ```
- ┌─────────────┐    ┌────────────┐   ┌──────────┐
- │             │    │            │   │          │
- │ EditorState ├───►│ EditorView ├──►│  Editing │
- │             │    │            │   │          │
- └─────────────┘    └────────────┘   └─────┬────┘
-        ▲                                  │
-        │                                  │
-        │           ┌─────────────┐        │
-        │           │             │        │
-        └───────────┤ Transaction │ ◄──────┘
+ ┌─────────────┐    ┌────────────┐    ┌──────────┐
+ │             │    │            │    │          │
+ │ EditorState ├───►│ EditorView ├───►│  Editing │
+ │             │    │            │    │          │
+ └─────────────┘    └────────────┘    └─────┬────┘
+        ▲                                   │
+        │                                   │
+        │           ┌─────────────┐         │
+        │           │             │         │
+        └───────────┤ Transaction │ ◄───────┘
                     │             │
                     └─────────────┘
 ```
