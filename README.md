@@ -1,3 +1,5 @@
+[DEMO](https://hedgerwang.github.io/learn-prosemirror-typescript-react-app/build/index.html)
+
 ## Learning ProseMirror
 
 [ProseMirror](https://prosemirror.net/) is a collection of open-sourced libraries which provides the utilities for rich text editing.
@@ -9,6 +11,11 @@
 - It has [active community support](https://discuss.prosemirror.net/).
 - It supports [collaborative editing](https://prosemirror.net/docs/guide/#collab).
 - It's is [designed](https://marijnhaverbeke.nl/blog/prosemirror-1.html) to support modern editor featured. Such as collaborative editing, custom rich contents...etc.
+
+# Examples
+
+- https://prosemirror.net/examples/
+- https://atlaskit.atlassian.com/packages/editor/editor-core/example/full-page-minimal
 
 ## Basic Data Flow
 
@@ -96,3 +103,4 @@ ProseMirror does not provide any UI, so we need to build the UI and all the inte
 ## Developer Guide
 
 1. This app is created with [create-react-app](https://github.com/facebook/create-react-app). Please read its instruction if needed.
+2. run `npm run build` to publish DEMO.
