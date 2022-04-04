@@ -6,6 +6,7 @@ import ParagraphNodeSpec from "./specs/ParagraphNodeSpec";
 import TextNodeSpec from "./specs/TextNodeSpec";
 import TextHighlightColorMarkSpec from "./specs/TextHighlightColorMarkSpec";
 import InputSecionNodeSpec from "./specs/InputSecionNodeSpec";
+import ImageNodeSpec from "./specs/ImageNodeSpec";
 
 export default function createEditorSchema(): Schema {
   return new Schema({
@@ -14,6 +15,7 @@ export default function createEditorSchema(): Schema {
       paragraph: ParagraphNodeSpec,
       inputSection: InputSecionNodeSpec,
       text: TextNodeSpec,
+      image: ImageNodeSpec,
     },
     marks: {
       textHighlightColor: TextHighlightColorMarkSpec,
