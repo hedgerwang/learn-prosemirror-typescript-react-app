@@ -10,6 +10,23 @@
 - It supports [collaborative editing](https://prosemirror.net/docs/guide/#collab).
 - It's is [designed](https://marijnhaverbeke.nl/blog/prosemirror-1.html) to support modern editor featured. Such as collaborative editing, custom rich contents...etc.
 
+## Basic Data Flow
+
+```
+ ┌─────────────┐    ┌────────────┐   ┌──────────┐
+ │             │    │            │   │          │
+ │ EditorState ├───►│ EditorView ├──►│  Editing │
+ │             │    │            │   │          │
+ └─────────────┘    └────────────┘   └─────┬────┘
+        ▲                                  │
+        │                                  │
+        │           ┌─────────────┐        │
+        │           │             │        │
+        └───────────┤ Transaction │ ◄──────┘
+                    │             │
+                    └─────────────┘
+```
+
 ## Core Data Structures
 
 ### Schema
@@ -64,11 +81,18 @@ ProseMirror does not provide any UI, so we need to build the UI and all the inte
 
 ## Advance editor features.
 
-1. Add plugin for text caret.
-2. Add transform to modify document.
+- Add transform to modify document.
+- Add plugin for text caret.
+- Add KeyMap to edit.
+- Add InputRule to edit.
 
 ---
 
-# Developer Guide
+### Quick Start
+
+- npm install
+- npm run start
+
+## Developer Guide
 
 1. This app is created with [create-react-app](https://github.com/facebook/create-react-app). Please read its instruction if needed.

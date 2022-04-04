@@ -93,13 +93,23 @@ export default function EditorActionMenu(props: { editorView: EditorView }) {
         Quick actions...
       </div>
       <MenuItem
-        label="Insert text from comments bank"
+        label="Insert math comments"
         action={SHOW_COMMENTS_BANK_MENU}
         editorView={editorView}
       />
       <MenuItem
-        label="Upload image"
-        action="upload-image"
+        label="Insert cogskill comments"
+        action={SHOW_COMMENTS_BANK_MENU}
+        editorView={editorView}
+      />
+      <MenuItem
+        label="Insert checkpoint comments"
+        action={SHOW_COMMENTS_BANK_MENU}
+        editorView={editorView}
+      />
+      <MenuItem
+        label="Insert final product comments"
+        action={SHOW_COMMENTS_BANK_MENU}
         editorView={editorView}
       />
     </div>

@@ -11,6 +11,7 @@ import TextHighlightColorSelector from "./TextHighlightColorSelector";
 import UndoButton from "./UndoButton";
 import applyTransaction from "./applyTransaction";
 import CommentsBankSelector from "./CommentsBankSelector";
+import InputSectionPanel from "./InputSectionPanel";
 
 function createInitialEditorState() {
   const schema = createEditorSchema();
@@ -57,6 +58,11 @@ export default function App() {
           onTransaction={onTransaction}
         />
         <CommentsBankSelector
+          editorState={editorState}
+          editorView={editorView}
+          onTransaction={onTransaction}
+        />
+        <InputSectionPanel
           editorState={editorState}
           editorView={editorView}
           onTransaction={onTransaction}

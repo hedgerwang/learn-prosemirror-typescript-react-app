@@ -2,6 +2,7 @@
 
 import { EditorState, Transaction } from "prosemirror-state";
 import getEditorStateStoredMarks from "./getEditorStateStoredMarks";
+import checkInputSectionMode from "./checkInputSectionMode";
 
 export default function applyTransaction(
   editorState: EditorState,
@@ -14,5 +15,6 @@ export default function applyTransaction(
       tr = tr.setStoredMarks(marks);
     }
   }
-  return editorState.apply(tr);
+
+  return checkInputSectionMode(editorState, tr);
 }
