@@ -1,9 +1,16 @@
 // @flow
-import { InputRule, inputRules } from "prosemirror-inputrules";
+import { inputRules } from "prosemirror-inputrules";
 import editorActionInputRule from "./inputrules/editorActionInputRule";
 import { Plugin } from "prosemirror-state";
+import catInputRule from "./inputrules/catInputRule";
 
 export default function createInputRules(): Plugin {
-  const rules: InputRule[] = [editorActionInputRule()];
-  return inputRules({ rules });
+  return inputRules({
+    rules: [
+      //
+      editorActionInputRule(),
+      //
+      catInputRule(),
+    ],
+  });
 }

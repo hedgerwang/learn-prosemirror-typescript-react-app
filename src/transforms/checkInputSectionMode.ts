@@ -5,7 +5,7 @@ import { EditorState, TextSelection, Transaction } from "prosemirror-state";
 import { findParentNode } from "prosemirror-utils";
 
 function checkEditorState(editorState: EditorState): boolean {
-  const nodeType = editorState.schema.nodes.inputSection;
+  const nodeType: NodeType = editorState.schema.nodes.inputSection;
   if (!nodeType) {
     return true;
   }
