@@ -40,14 +40,13 @@ export default function checkInputSectionMode(
   tr: Transaction
 ): EditorState {
   const nextEditorState = editorState.apply(tr);
-
   if (!tr.docChanged) {
     return nextEditorState;
   }
 
   const lastStep: any = tr.steps[tr.steps.length - 1];
   if (lastStep?.key === "inputSectionMode") {
-    // allow step to toggle  "inputSectionMode"
+    // allow step to toggle  "inputSectionMode".
     return nextEditorState;
   }
 

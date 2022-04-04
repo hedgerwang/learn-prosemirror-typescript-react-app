@@ -3,8 +3,8 @@ import { EditorState, Transaction } from "prosemirror-state";
 import { EditorView } from "prosemirror-view";
 import { BUTTON, BUTTON_DISABLED } from "./styles";
 import cx from "classnames";
-import insertInputSection from "./insertInputSection";
-import setInputSectionMode from "./setInputSectionMode";
+import insertInputSection from "../transforms/insertInputSection";
+import setInputSectionMode from "../transforms/setInputSectionMode";
 
 export default function InputSectionPanel(props: {
   editorState: EditorState;
@@ -15,13 +15,14 @@ export default function InputSectionPanel(props: {
   const { editorState, editorView, onTransaction } = props;
   const { schema } = editorState;
   const inputSectionMode = !!editorState.doc.attrs.inputSectionMode;
-  const nextTr = insertInputSection(schema, editorState.tr);
-  const disabled = !nextTr.docChanged;
+  const dryRun = insertInputSection(schema, editorState.tr, true);
+  const disabled = dryRun.getMeta("ok") ? false : true;
 
   const onInsertInputSection = () => {
     if (editorView) {
       editorView.focus();
-      onTransaction(nextTr);
+      const tr2 = insertInputSection(schema, editorState.tr);
+      onTransaction(tr2);
     }
   };
 

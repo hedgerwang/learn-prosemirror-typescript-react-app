@@ -9,9 +9,12 @@ import {
 import { Decoration, DecorationSet, EditorView } from "prosemirror-view";
 import { createRoot } from "react-dom/client";
 import React from "react";
-import EditorActionMenu from "./EditorActionMenu";
+import EditorActionMenu from "../components/EditorActionMenu";
 import EditorViewPlugin from "./EditorViewPlugin";
-import { SHOW_ACTION_MENU, HIDE_ACTION_MENU } from "./EditorActionMenu";
+import {
+  SHOW_ACTION_MENU,
+  HIDE_ACTION_MENU,
+} from "../components/EditorActionMenu";
 
 const DECO_TYPE = "select-action-menu";
 

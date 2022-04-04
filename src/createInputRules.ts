@@ -1,6 +1,6 @@
 // @flow
 import { InputRule, inputRules } from "prosemirror-inputrules";
-import editorActionInputRule from "./editorActionInputRule";
+import editorActionInputRule from "./inputrules/editorActionInputRule";
 import { Plugin } from "prosemirror-state";
 
 export default function createInputRules(): Plugin {

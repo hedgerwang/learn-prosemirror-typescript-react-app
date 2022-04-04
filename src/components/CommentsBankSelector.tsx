@@ -2,7 +2,7 @@
 import { EditorState, Transaction } from "prosemirror-state";
 import { EditorView } from "prosemirror-view";
 import { useCallback, useEffect, useRef, useState } from "react";
-import insertText from "./insertText";
+import insertText from "../transforms/insertText";
 import cx from "classnames";
 
 let COMMENTS = [

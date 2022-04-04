@@ -1,7 +1,7 @@
 // @flow
 import { undo, redo } from "prosemirror-history";
 import type { Keymap } from "prosemirror-commands";
-import enterParagraphCommand from "./enterParagraphCommand";
+import enterParagraphCommand from "./transforms/enterParagraphCommand";
 
 const IS_MAC =
   /Mac/.test(String(window.navigator.platform)) ||

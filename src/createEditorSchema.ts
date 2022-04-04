@@ -1,18 +1,18 @@
 // @flow
 
 import { Schema } from "prosemirror-model";
-import DocNodeSpec from "./DocNodeSpec";
-import ParagraphNodeSpec from "./ParagraphNodeSpec";
-import TextNodeSpec from "./TextNodeSpec";
-import TextHighlightColorMarkSpec from "./TextHighlightColorMarkSpec";
-import InputSecionNodeSpec from "./InputSecionNodeSpec";
+import DocNodeSpec from "./specs/DocNodeSpec";
+import ParagraphNodeSpec from "./specs/ParagraphNodeSpec";
+import TextNodeSpec from "./specs/TextNodeSpec";
+import TextHighlightColorMarkSpec from "./specs/TextHighlightColorMarkSpec";
+import InputSecionNodeSpec from "./specs/InputSecionNodeSpec";
 
 export default function createEditorSchema(): Schema {
   return new Schema({
     nodes: {
       doc: DocNodeSpec,
-      inputSection: InputSecionNodeSpec,
       paragraph: ParagraphNodeSpec,
+      inputSection: InputSecionNodeSpec,
       text: TextNodeSpec,
     },
     marks: {

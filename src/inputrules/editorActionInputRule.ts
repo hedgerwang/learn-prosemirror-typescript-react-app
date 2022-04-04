@@ -2,7 +2,7 @@
 
 import { EditorState, Transaction } from "prosemirror-state";
 import { InputRule } from "prosemirror-inputrules";
-import { SHOW_ACTION_MENU } from "./EditorActionMenu";
+import { SHOW_ACTION_MENU } from "../components/EditorActionMenu";
 
 function handleActionInputRule(
   state: EditorState,

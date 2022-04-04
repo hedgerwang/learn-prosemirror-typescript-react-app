@@ -1,8 +1,8 @@
 // @flow
 
 import { EditorState, TextSelection } from "prosemirror-state";
-import findMarksBetween from "./findMarksBetween";
-import getEditorStateStoreMarks from "./getEditorStateStoredMarks";
+import findMarksBetween from "../transforms/findMarksBetween";
+import getEditorStateStoreMarks from "../transforms/getEditorStateStoredMarks";
 import { useEffect, useState } from "react";
 
 export default function useActiveTextHighlightColor(

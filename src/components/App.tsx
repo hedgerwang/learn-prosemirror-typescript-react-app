@@ -2,14 +2,14 @@
 import { EditorState, Transaction } from "prosemirror-state";
 import { EditorView } from "prosemirror-view";
 import { useCallback, useState } from "react";
-import createEditorPlugins from "./createEditorPlugins";
-import createEditorSchema from "./createEditorSchema";
-import createEditorState from "./createEditorState";
+import createEditorPlugins from "../createEditorPlugins";
+import createEditorSchema from "../createEditorSchema";
+import createEditorState from "../createEditorState";
 import EditableArea from "./EditableArea";
 import RedoButton from "./RedoButton";
 import TextHighlightColorSelector from "./TextHighlightColorSelector";
 import UndoButton from "./UndoButton";
-import applyTransaction from "./applyTransaction";
+import applyTransaction from "../transforms/applyTransaction";
 import CommentsBankSelector from "./CommentsBankSelector";
 import InputSectionPanel from "./InputSectionPanel";
 

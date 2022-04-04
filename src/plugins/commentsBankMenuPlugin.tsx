@@ -9,12 +9,12 @@ import {
 import { Decoration, DecorationSet, EditorView } from "prosemirror-view";
 import { createRoot } from "react-dom/client";
 import React from "react";
-import CommentsBankMenu from "./CommentsBankMenu";
+import CommentsBankMenu from "../components/CommentsBankMenu";
 import EditorViewPlugin from "./EditorViewPlugin";
 import {
   SHOW_COMMENTS_BANK_MENU,
   HIDE_COMMENTS_BANK_MENU,
-} from "./CommentsBankMenu";
+} from "../components/CommentsBankMenu";
 
 const DECO_TYPE = "select-action-menu";
 

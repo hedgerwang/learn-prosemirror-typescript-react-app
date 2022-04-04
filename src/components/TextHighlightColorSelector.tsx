@@ -2,7 +2,7 @@
 import { EditorState, Transaction } from "prosemirror-state";
 import { EditorView } from "prosemirror-view";
 import { useCallback, useRef, useEffect } from "react";
-import setTextHighlightColor from "./setTextHighlightColor";
+import setTextHighlightColor from "../transforms/setTextHighlightColor";
 import drawColorGradient from "./drawColorGradient";
 import getEventOffset from "./getEventOffset";
 import useActiveTextHighlightColor from "./useActiveTextHighlightColor";

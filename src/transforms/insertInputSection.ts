@@ -4,7 +4,11 @@ import { Schema, Fragment } from "prosemirror-model";
 import { Transaction, TextSelection } from "prosemirror-state";
 import { findParentNode } from "prosemirror-utils";
 
-export default function insertInputSection(schema: Schema, tr: Transaction) {
+export default function insertInputSection(
+  schema: Schema,
+  tr: Transaction,
+  dryrun = false
+) {
   if (tr.doc.attrs.inputSectionMode) {
     return tr;
   }
@@ -41,6 +45,10 @@ export default function insertInputSection(schema: Schema, tr: Transaction) {
 
   if (atInputSection) {
     return tr;
+  }
+
+  if (dryrun) {
+    return tr.setMeta("ok", true);
   }
 
   const frag = Fragment.from([
