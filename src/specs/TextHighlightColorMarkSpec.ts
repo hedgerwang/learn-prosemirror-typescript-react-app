@@ -9,7 +9,7 @@ const TextHighlightColorMarkSpec: MarkSpec = {
   group: "inline",
   parseDOM: [
     {
-      style: "color",
+      style: "background-color",
       getAttrs: (color: string | Node) => {
         if (typeof color === "string") {
           return { color: color || null };
@@ -22,6 +22,7 @@ const TextHighlightColorMarkSpec: MarkSpec = {
   ],
   toDOM(mark: Mark) {
     const { color } = mark.attrs;
+    console.log(color);
     let style;
     if (color) {
       style = `background-color: ${color};`;

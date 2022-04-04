@@ -10,12 +10,14 @@ const ParagraphNodeSpec: NodeSpec = {
   parseDOM: [
     {
       tag: "p",
-      getAttrs: () => {
+      getAttrs: (source) => {
+        console.log("parseDOM P ", source);
         return {};
       },
     },
   ],
   toDOM: (node: Node) => {
+    console.log(">>>>toDOM P", node);
     const attrs = {
       class: "my-2",
     };

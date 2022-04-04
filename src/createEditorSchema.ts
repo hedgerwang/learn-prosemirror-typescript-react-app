@@ -13,11 +13,11 @@ export default function createEditorSchema(): Schema {
   return new Schema({
     nodes: {
       doc: DocNodeSpec,
+      text: TextNodeSpec,
+      heading: HeadingNodeSpec,
       paragraph: ParagraphNodeSpec,
       inputSection: InputSecionNodeSpec,
-      text: TextNodeSpec,
       image: ImageNodeSpec,
-      heading: HeadingNodeSpec,
     },
     marks: {
       textHighlightColor: TextHighlightColorMarkSpec,

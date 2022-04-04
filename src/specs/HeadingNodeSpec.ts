@@ -4,13 +4,14 @@ import { Node } from "prosemirror-model";
 import type { NodeSpec } from "prosemirror-model";
 
 function getAttrs(source: any) {
+  console.log(">>>>", source);
   if (source instanceof HTMLElement) {
     const matched = source.nodeName.match(/\d+/);
     if (matched) {
       return { level: parseInt(matched[0], 10) };
     }
   }
-  return {};
+  return null;
 }
 
 const HEADING_STYLES: { [key: string]: string } = {
@@ -24,7 +25,7 @@ const HEADING_STYLES: { [key: string]: string } = {
 const HeadingNodeSpec: NodeSpec = {
   attrs: {
     level: {
-      default: null,
+      default: 4,
     },
   },
   content: "inline*",
@@ -36,9 +37,14 @@ const HeadingNodeSpec: NodeSpec = {
     { tag: "h4", getAttrs },
   ],
   toDOM: (node: Node) => {
+    console.log(">>>>toDOM H", node);
     const { level } = node.attrs;
-    const tag = `h${level}`;
-    const styles = HEADING_STYLES[tag] || HEADING_STYLES.default;
+    let tag = `h${level}`;
+    let styles = HEADING_STYLES[tag];
+    if (!styles) {
+      tag = "h3";
+      styles = HEADING_STYLES.default;
+    }
     const attrs = {
       class: "my-2 font-bold " + styles,
     };
