@@ -103,4 +103,4 @@ ProseMirror does not provide any UI, so we need to build the UI and all the inte
 ## Developer Guide
 
 1. This app is created with [create-react-app](https://github.com/facebook/create-react-app). Please read its instruction if needed.
-2. run `npm run build` to publish DEMO.
+2. run `npm run deploy` to publish DEMO.
