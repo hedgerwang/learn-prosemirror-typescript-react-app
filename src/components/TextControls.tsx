@@ -12,6 +12,7 @@ import {
   TOGGLE_H4_COMMAND,
 } from "../transforms/toggleHeadingCommand";
 import { Command } from "prosemirror-commands";
+import toggleCheckboxBlock from "../transforms/toggleCheckboxBlock";
 
 type Props = {
   editorState: EditorState;
@@ -44,6 +45,13 @@ function ControlButton(
   );
 }
 
+const TOGGLE_CHECKBOX_COMMAND: Command = (state, dispatch, view) => {
+  let tr = state.tr;
+  tr = toggleCheckboxBlock(state.schema, tr);
+  dispatch && dispatch(tr);
+  return tr.docChanged;
+};
+
 export default function TextControls(props: Props) {
   const state = props.editorState;
   return (
@@ -74,8 +82,8 @@ export default function TextControls(props: Props) {
       />
       <ControlButton
         {...props}
-        label={<input type="checkbox" />}
-        command={TOGGLE_H4_COMMAND}
+        label={<input className="pointer-events-none" type="checkbox" />}
+        command={TOGGLE_CHECKBOX_COMMAND}
       />
     </div>
   );

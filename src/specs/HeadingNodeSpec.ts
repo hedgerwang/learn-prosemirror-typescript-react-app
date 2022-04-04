@@ -36,7 +36,6 @@ const HeadingNodeSpec: NodeSpec = {
     { tag: "h4", getAttrs },
   ],
   toDOM: (node: Node) => {
-    console.log(">>>>toDOM H", node);
     const { level } = node.attrs;
     let tag = `h${level}`;
     let styles = HEADING_STYLES[tag];

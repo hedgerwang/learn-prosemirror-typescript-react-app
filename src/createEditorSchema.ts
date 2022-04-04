@@ -14,9 +14,9 @@ export default function createEditorSchema(): Schema {
     nodes: {
       doc: DocNodeSpec,
       text: TextNodeSpec,
-      heading: HeadingNodeSpec,
       paragraph: ParagraphNodeSpec,
       inputSection: InputSecionNodeSpec,
+      heading: HeadingNodeSpec,
       image: ImageNodeSpec,
     },
     marks: {
