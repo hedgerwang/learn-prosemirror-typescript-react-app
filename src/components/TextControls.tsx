@@ -13,7 +13,7 @@ import {
 } from "../transforms/toggleHeadingCommand";
 import { Command } from "prosemirror-commands";
 import toggleCheckboxBlock from "../transforms/toggleCheckboxBlock";
-
+import { findParentNode } from "prosemirror-utils";
 type Props = {
   editorState: EditorState;
   editorView: EditorView | null;
@@ -52,8 +52,25 @@ const TOGGLE_CHECKBOX_COMMAND: Command = (state, dispatch, view) => {
   return tr.docChanged;
 };
 
+function isAtCheckboxBlock(state: EditorState): boolean {
+  const nodeType = state.schema.nodes.paragraph;
+  if (!nodeType) {
+    return false;
+  }
+  const nodePos = findParentNode((nn) => nn.type === nodeType)(state.selection);
+  if (!nodePos) {
+    return false;
+  }
+  console.log(
+    ">> nodePos.node.attrs.appearance",
+    nodePos.node.attrs.appearance
+  );
+  return nodePos.node.attrs.appearance === "checkbox";
+}
+
 export default function TextControls(props: Props) {
   const state = props.editorState;
+  const isCheckbox = isAtCheckboxBlock(state);
   return (
     <div className="flex flex-row my-2 overflow-hidden rounded-md">
       <ControlButton
@@ -82,8 +99,15 @@ export default function TextControls(props: Props) {
       />
       <ControlButton
         {...props}
-        label={<input className="pointer-events-none" type="checkbox" />}
+        label={
+          <input
+            className="pointer-events-none"
+            checked={isCheckbox}
+            type="checkbox"
+          />
+        }
         command={TOGGLE_CHECKBOX_COMMAND}
+        active={isCheckbox}
       />
     </div>
   );
