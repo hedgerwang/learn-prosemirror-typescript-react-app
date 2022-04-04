@@ -5,7 +5,7 @@ import type { NodeSpec } from "prosemirror-model";
 
 const InputSecionNodeSpec: NodeSpec = {
   attrs: {},
-  content: "paragraph+",
+  content: "(paragraph|heading)+",
   group: "block",
   parseDOM: [
     {
