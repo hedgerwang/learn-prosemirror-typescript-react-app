@@ -34,6 +34,7 @@ export default function toggleCheckboxBlock(
   const { pos, node } = paragraph;
   const attrs = {
     ...node.attrs,
+    checked: true,
     appearance: node.attrs.appearance === "checkbox" ? null : "checkbox",
   };
 

@@ -3,6 +3,14 @@
 import { Node } from "prosemirror-model";
 import type { NodeSpec } from "prosemirror-model";
 
+const CHECK_MARK_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+  <text x="5" y="16" fill="white">✓</text>
+  </svg>`;
+
+const CHECK_BOX_BG_STYLE = `background-image: url("data:image/svg+xml,${window.encodeURIComponent(
+  CHECK_MARK_SVG
+)}");`;
+
 const ParagraphNodeSpec: NodeSpec = {
   attrs: {
     appearance: {
@@ -27,23 +35,27 @@ const ParagraphNodeSpec: NodeSpec = {
     const divAttrs = {
       class: "my-2 flex",
     };
-    const pAttrs = {
-      class: "flex-1",
-    };
+
+    const dom: any = ["div", divAttrs];
 
     if (appearance === "checkbox") {
-      const cAttrs: { [k: string]: any } = {
-        type: "checkbox",
-        name: "paragraph-checkbox",
-        class: "mt-1 pt-1 mx-2 w-4 h-4",
-      };
-      if (checked) {
-        cAttrs.checked = "";
-      }
-      return ["div", divAttrs, ["input", cAttrs], ["p", pAttrs, 0]];
-    } else {
-      return ["div", divAttrs, ["p", pAttrs, 0]];
+      dom.push([
+        "label",
+        { class: "contents relative" },
+        [
+          "input",
+          {
+            class:
+              "appearance-none bg-center bg-no-repeat border border-1 cursor-pointer h-6 inline-block mx-2 rounded select-none shadow-md w-6 hover:bg-gray-400 " +
+              (checked ? "bg-blue-500" : "bg-white"),
+            type: "checkbox",
+            style: checked ? CHECK_BOX_BG_STYLE : "",
+          },
+        ],
+      ]);
     }
+    dom.push(["p", { class: "flex-1" }, 0]);
+    return dom;
   },
 };
 
