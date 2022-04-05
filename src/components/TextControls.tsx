@@ -14,6 +14,7 @@ import {
 import { Command } from "prosemirror-commands";
 import toggleCheckboxBlock from "../transforms/toggleCheckboxBlock";
 import { findParentNode } from "prosemirror-utils";
+
 type Props = {
   editorState: EditorState;
   editorView: EditorView | null;

@@ -1,7 +1,7 @@
 // @flow
 import { EditorState, Transaction } from "prosemirror-state";
 import { EditorView } from "prosemirror-view";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import createEditorPlugins from "../createEditorPlugins";
 import createEditorSchema from "../createEditorSchema";
 import createEditorState from "../createEditorState";
@@ -12,10 +12,17 @@ import applyTransaction from "../transforms/applyTransaction";
 import CommentsBankSelector from "./CommentsBankSelector";
 import InputSectionPanel from "./InputSectionPanel";
 import HistoryControls from "./HistoryControls";
+
 function createInitialEditorState() {
   const schema = createEditorSchema();
   const plugins = createEditorPlugins();
-  return createEditorState(schema, plugins);
+  let json: Object | null = null;
+  try {
+    json = JSON.parse(window.name);
+  } catch (ex) {
+    // skip;
+  }
+  return createEditorState(schema, plugins, json);
 }
 
 export default function App() {
@@ -26,9 +33,23 @@ export default function App() {
   const [editorView, setEditorView] = useState<EditorView | null>(null);
 
   const onTransaction = useCallback(
-    (tr: Transaction) => setEditorState(applyTransaction(editorState, tr)),
+    (tr: Transaction) => {
+      const state = applyTransaction(editorState, tr);
+      setEditorState(state);
+    },
     [editorState, setEditorState]
   );
+
+  useEffect(() => {
+    document.title = "saving...";
+    const timer = setTimeout(() => {
+      const json = editorState.doc.toJSON();
+      // Store json into current tab's session
+      window.name = JSON.stringify(json);
+      document.title = "saved";
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [editorState]);
 
   return (
     <div className="bg-gray-200 box-border flex flex-row h-screen p-6">

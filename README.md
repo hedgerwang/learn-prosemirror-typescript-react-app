@@ -90,8 +90,8 @@ ProseMirror does not provide any UI, so we need to build the UI and all the inte
 
 - Add transform to modify document.
 - Add plugin for text caret.
-- Add KeyMap to edit.
-- Add InputRule to edit.
+- Add keyboard mapping to edit.
+- Add macro (input rule) to edit.
 
 ---
 
