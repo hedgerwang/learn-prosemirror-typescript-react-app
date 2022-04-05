@@ -44,7 +44,7 @@ export default function InputSectionPanel(props: {
 
       <label className="block my-2 py-2 cursor-pointer">
         <input
-          checked={inputSectionMode}
+          checked={!!inputSectionMode}
           type="checkbox"
           onChange={toggleInputSectionMode}
           className="

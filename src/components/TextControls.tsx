@@ -65,6 +65,8 @@ function isAtCheckboxBlock(state: EditorState): boolean {
   return nodePos.node.attrs.appearance === "checkbox";
 }
 
+function noop() {}
+
 export default function TextControls(props: Props) {
   const state = props.editorState;
   const isCheckbox = isAtCheckboxBlock(state);
@@ -99,7 +101,8 @@ export default function TextControls(props: Props) {
         label={
           <input
             className="pointer-events-none"
-            checked={isCheckbox}
+            checked={!!isCheckbox}
+            onChange={noop}
             type="checkbox"
           />
         }

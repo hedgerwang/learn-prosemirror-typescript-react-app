@@ -50,7 +50,7 @@ export default function EditableArea(props: Props) {
 
       editorView.focus();
 
-      applyDevTools(editorView);
+      // applyDevTools(editorView);
       return () => {
         editorView.destroy();
         editorViewRef.current = null;
