@@ -10,7 +10,7 @@ import TextControls from "./TextControls";
 import TextHighlightColorSelector from "./TextHighlightColorSelector";
 import applyTransaction from "../transforms/applyTransaction";
 import CommentsBankSelector from "./CommentsBankSelector";
-import InputSectionPanel from "./InputSectionPanel";
+import WorksheetControls from "./WorksheetControls";
 import HistoryControls from "./HistoryControls";
 
 function createInitialEditorState() {
@@ -82,7 +82,7 @@ export default function App() {
           editorView={editorView}
           onTransaction={onTransaction}
         />
-        <InputSectionPanel
+        <WorksheetControls
           editorState={editorState}
           editorView={editorView}
           onTransaction={onTransaction}

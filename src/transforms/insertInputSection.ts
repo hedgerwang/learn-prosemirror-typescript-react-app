@@ -1,6 +1,6 @@
 // @flow
 
-import { Schema, Fragment, NodeType } from "prosemirror-model";
+import { Schema, Fragment } from "prosemirror-model";
 import { Transaction, TextSelection } from "prosemirror-state";
 import { findParentNode } from "prosemirror-utils";
 
@@ -28,7 +28,7 @@ function insertInputSectionAt(
     paragraphType.create({}, schema.text(" ")),
   ]);
   tr = tr.insert(pos, frag);
-  const sel = TextSelection.create(tr.doc, tr.selection.to + 2);
+  const sel = TextSelection.create(tr.doc, pos + 3);
   tr = tr.setSelection(sel);
   return tr;
 }
@@ -61,7 +61,8 @@ export default function insertInputSection(
   })(selection);
 
   if (atInputSection) {
-    return tr;
+    const { pos, node } = atInputSection;
+    return insertInputSectionAt(schema, tr, pos + node.nodeSize, dryrun);
   }
 
   const headingType = schema.nodes.heading;
@@ -70,8 +71,8 @@ export default function insertInputSection(
   })(selection);
 
   if (atHeading) {
-    const pos = atHeading.pos + atHeading.node.nodeSize;
-    return insertInputSectionAt(schema, tr, pos, dryrun);
+    const { pos, node } = atHeading;
+    return insertInputSectionAt(schema, tr, pos + node.nodeSize, dryrun);
   }
 
   const atParagraph = findParentNode((node) => {

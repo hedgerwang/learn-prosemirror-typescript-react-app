@@ -2,7 +2,7 @@
 
 import { EditorState, Transaction } from "prosemirror-state";
 import getEditorStateStoredMarks from "./getEditorStateStoredMarks";
-import checkInputSectionMode from "./checkInputSectionMode";
+import checkWorksheetMode from "./checkWorksheetMode";
 
 export default function applyTransaction(
   editorState: EditorState,
@@ -16,5 +16,5 @@ export default function applyTransaction(
     }
   }
 
-  return checkInputSectionMode(editorState, tr);
+  return checkWorksheetMode(editorState, tr);
 }
