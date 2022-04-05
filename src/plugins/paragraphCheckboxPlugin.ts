@@ -1,6 +1,6 @@
 // @flow
 
-import { Plugin } from "prosemirror-state";
+import { Plugin, TextSelection } from "prosemirror-state";
 import EditorViewPlugin from "./EditorViewPlugin";
 import { EditorView } from "prosemirror-view";
 import { findParentNode } from "prosemirror-utils";
@@ -12,6 +12,18 @@ function handleDOMEvent(view: EditorView, evt: Event): boolean {
   // TODO: fix navigation with Left or Up key while
   // checkbox is rendered.
   // console.log(">>>", evt);
+
+  const { schema, selection, doc } = view.state;
+  if (
+    selection.empty &&
+    selection instanceof TextSelection &&
+    evt instanceof KeyboardEvent &&
+    (evt.key === "ArrowLeft" || evt.key === "ArrowUp")
+  ) {
+    // moved text carret.
+    const node = doc.nodeAt(selection.from - 3);
+    console.log(node);
+  }
 
   if (!(target instanceof HTMLInputElement)) {
     return false;
@@ -28,7 +40,6 @@ function handleDOMEvent(view: EditorView, evt: Event): boolean {
     }
   }
 
-  const { schema, selection } = view.state;
   const paragraphType: NodeType = schema.nodes.paragraph;
   const paragraph = findParentNode((node) => node.type === paragraphType)(
     selection
@@ -55,9 +66,9 @@ export default function paragraphCheckboxPlugin(): Plugin {
   const plugin = new EditorViewPlugin({
     props: {
       handleDOMEvents: {
-        change: handleDOMEvent,
-        click: handleDOMEvent,
-        keydown: handleDOMEvent,
+        // change: handleDOMEvent,
+        // click: handleDOMEvent,
+        // keydown: handleDOMEvent,
       },
     },
   });

@@ -1,7 +1,7 @@
 // @flow
 import { EditorState, Transaction } from "prosemirror-state";
 import { EditorView } from "prosemirror-view";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import createEditorPlugins from "../createEditorPlugins";
 import createEditorSchema from "../createEditorSchema";
 import createEditorState from "../createEditorState";
@@ -26,6 +26,8 @@ function createInitialEditorState() {
 }
 
 export default function App() {
+  const savedDoc = useRef({});
+
   const [editorState, setEditorState] = useState<EditorState>(
     createInitialEditorState
   );
@@ -41,14 +43,18 @@ export default function App() {
   );
 
   useEffect(() => {
-    document.title = "saving...";
-    const timer = setTimeout(() => {
-      const json = editorState.doc.toJSON();
-      // Store json into current tab's session
-      window.name = JSON.stringify(json);
-      document.title = "saved";
-    }, 500);
-    return () => clearTimeout(timer);
+    const { doc } = editorState;
+    if (savedDoc.current !== doc) {
+      document.title = "Saving...";
+      const timer = setTimeout(() => {
+        savedDoc.current = doc;
+        const json = editorState.doc.toJSON();
+        // Store json into current tab's session
+        window.name = JSON.stringify(json);
+        document.title = "Saved";
+        return () => clearTimeout(timer);
+      }, 500);
+    }
   }, [editorState]);
 
   return (
