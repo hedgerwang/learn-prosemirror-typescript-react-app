@@ -3,8 +3,9 @@
 import { NodeType } from "prosemirror-model";
 import { EditorState, TextSelection, Transaction } from "prosemirror-state";
 import { findParentNode } from "prosemirror-utils";
+import queryDescendants from "./queryDescendants";
 
-function checkEditorState(editorState: EditorState): boolean {
+function isAtSameInputSection(editorState: EditorState): boolean {
   const nodeType: NodeType = editorState.schema.nodes.inputSection;
   if (!nodeType) {
     return true;
@@ -28,6 +29,7 @@ function checkEditorState(editorState: EditorState): boolean {
       fromNodePos?.node === toNodePos?.node &&
       fromNodePos?.pos === toNodePos?.pos
     ) {
+      // Selection remain within the same section.
       return true;
     }
   }
@@ -54,7 +56,23 @@ export default function checkworksheetMode(
     return nextEditorState;
   }
 
-  return checkEditorState(editorState) && checkEditorState(nextEditorState)
-    ? nextEditorState
-    : editorState;
+  if (
+    !isAtSameInputSection(editorState) ||
+    !isAtSameInputSection(nextEditorState)
+  ) {
+    return editorState;
+  }
+  const nodeType = editorState.schema.nodes.inputSection;
+  const beforeCount = queryDescendants(editorState.doc, nodeType).length;
+  const afterCount = queryDescendants(nextEditorState.doc, nodeType).length;
+  // TODO: if (afterCoun - beforeCount === 1)
+  // combine split sections
+  // console.log({
+  //   beforeCount,
+  //   afterCount,
+  // });
+  if (!beforeCount || beforeCount !== afterCount) {
+    return editorState;
+  }
+  return nextEditorState;
 }
