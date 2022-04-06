@@ -3,7 +3,11 @@
 import type { NodeSpec } from "prosemirror-model";
 
 const DocNodeSpec: NodeSpec = {
-  attrs: {},
+  attrs: {
+    worksheetMode: {
+      default: false,
+    },
+  },
   content: "block+",
 };
 

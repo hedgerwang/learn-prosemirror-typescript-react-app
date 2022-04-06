@@ -42,12 +42,9 @@ export default function EditableArea(props: Props) {
       }
 
       dom.className +=
-        " bg-white border border-1 break-all min-h-full m-auto mx-auto" +
+        " border border-1 break-all min-h-full m-auto mx-auto" +
         " outline-none p-6 shadow text-base shadow w-full" +
         " whitespace-pre-wrap";
-
-      dom.style.cssText = "max-width: 210mm;";
-
       editorView.focus();
 
       // applyDevTools(editorView);
@@ -69,7 +66,25 @@ export default function EditableArea(props: Props) {
     if (editorView && editorState && editorView.state !== editorState) {
       editorView.updateState(editorState);
     }
+    const element = elementRef.current;
+    if (element) {
+      const { doc } = editorState;
+      if (doc.attrs.worksheetMode) {
+        element.classList.add("bg-gray-100");
+        element.classList.add("select-none");
+        element.classList.remove("bg-white");
+      } else {
+        element.classList.remove("bg-gray-100");
+        element.classList.add("bg-white");
+      }
+    }
   }, [editorState]);
 
-  return <div className="content flex flex-1" ref={elementRef} />;
+  return (
+    <div
+      className="content flex flex-1 mx-auto"
+      style={{ maxWidth: "210mm" }}
+      ref={elementRef}
+    />
+  );
 }

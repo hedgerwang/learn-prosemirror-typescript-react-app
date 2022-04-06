@@ -17,7 +17,8 @@ const InputSecionNodeSpec: NodeSpec = {
   ],
   toDOM: (node: Node) => {
     const attrs = {
-      class: "border border-2 border-gray-800 my-4 p-4 rounded shadow-inner",
+      class:
+        "bg-white border border-1 border-gray-800 my-4 p-4 rounded shadow ring-2 ring-gray-500",
       "data-input-section": "true",
     };
     return ["section", attrs, 0];
