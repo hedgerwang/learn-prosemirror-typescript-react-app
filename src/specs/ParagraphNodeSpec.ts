@@ -47,8 +47,8 @@ const ParagraphNodeSpec: NodeSpec = {
           {
             class:
               "appearance-none bg-center bg-no-repeat ring-2 ring-gray-500 " +
-              "border-black cursor-pointer h-5 inline-block top-1 mx-2 " +
-              "hover:bg-gray-500 relative rounded select-none shadow-md w-5 " +
+              "border-black cursor-pointer h-4 inline-block top-1 mx-2 " +
+              "hover:bg-gray-500 relative rounded select-none shadow-md w-4 " +
               (checked ? "bg-blue-500" : "bg-white"),
             type: "checkbox",
             style: checked ? CHECK_BOX_BG_STYLE : "",

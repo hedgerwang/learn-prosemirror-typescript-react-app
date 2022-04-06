@@ -85,7 +85,7 @@ export default function TextHighlightColorSelector(props: {
 
         <button
           className="outline-none rounded-br rounded-bl overflow-hidden border-t block"
-          onClick={onClick}
+          onClick={EyeDropper ? onEyeDropperClick : onClick}
         >
           <canvas
             className="outline-none block cursor-crosshair"

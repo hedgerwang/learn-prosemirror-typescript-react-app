@@ -10,7 +10,7 @@ function handleInputRule(
   start: number,
   end: number
 ): Transaction | null {
-  const token = match[0];
+  const token = match[1];
   if (!token) {
     return null;
   }
@@ -29,9 +29,9 @@ function handleInputRule(
     return null;
   }
 
-  const size = match[1] || "";
+  const size = match[2] || "";
   const macthedSize = size.match(/(\d+)x(\d+)/) ||
-    size.match(/(\d+)/) || ["", "50", "50"];
+    size.match(/(\d+)/) || ["", "400", "300"];
 
   let ww = 0;
   let hh = 0;
@@ -49,7 +49,11 @@ function handleInputRule(
     return null;
   }
 
-  const src = `https://placekitten.com/${ww}/${hh}`;
+  const src =
+    token === ":cat"
+      ? `https://placekitten.com/${ww}/${hh}`
+      : `https://picsum.photos/${ww}/${hh}`;
+
   const node = nodeType.create({ src, width: ww, height: hh });
 
   let { tr } = state;
@@ -60,5 +64,5 @@ function handleInputRule(
 }
 
 export default function catInputRule(): InputRule {
-  return new InputRule(/:cat(\d+|\d+x\d+)?\s/, handleInputRule);
+  return new InputRule(/(:cat|:photo)(\d+|\d+x\d+)?\s/, handleInputRule);
 }

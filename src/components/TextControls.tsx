@@ -27,20 +27,28 @@ function ControlButton(
     active?: boolean;
     command: Command;
     label: string | ReactNode;
+    title?: string | undefined;
   }
 ) {
-  const { active, command, label, editorState, editorView, onTransaction } =
-    props;
+  const {
+    active,
+    command,
+    label,
+    title,
+    editorState,
+    editorView,
+    onTransaction,
+  } = props;
   const classNames = cx(
     "bg-gray-100 border border-1 border-white flex-1 p-4 hover:bg-gray-200 focus:bg-gray-200 text-gray-400",
-    { ["text-black"]: active, ["font-bold"]: active }
+    { "text-black": active, "font-bold": active }
   );
   const onClick = () => {
     editorView && editorView.focus();
     command(editorState, onTransaction);
   };
   return (
-    <button className={classNames} onClick={onClick}>
+    <button className={classNames} onClick={onClick} title={title}>
       {label}
     </button>
   );
@@ -98,6 +106,7 @@ export default function TextControls(props: Props) {
       />
       <ControlButton
         {...props}
+        title="Toggle block checkbox with checkbox"
         label={
           <input
             className="pointer-events-none"

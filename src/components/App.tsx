@@ -58,7 +58,7 @@ export default function App() {
   }, [editorState]);
 
   return (
-    <div className="bg-gray-200 box-border flex flex-row h-screen p-6">
+    <div className="bg-gray-200 box-border flex flex-row min-h-screen p-6">
       <div className="flex flex-1 flex-row">
         <EditableArea
           editorState={editorState}
