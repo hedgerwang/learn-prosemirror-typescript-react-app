@@ -16,7 +16,6 @@ function MenuItem(props: {
   const { label, action, editorView } = props;
 
   const onClick = useCallback(() => {
-    editorView.focus();
     let tr = editorView.state.tr.setMeta("action", {
       [HIDE_ACTION_MENU]: true,
       [action]: true,

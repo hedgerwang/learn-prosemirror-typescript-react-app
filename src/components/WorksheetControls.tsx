@@ -35,7 +35,6 @@ export default function WorksheetControls(props: {
 
   const onInsertInputSection = () => {
     if (editorView) {
-      editorView.focus();
       const tr2 = insertInputSection(schema, editorState.tr);
       onTransaction(tr2);
     }
@@ -43,7 +42,6 @@ export default function WorksheetControls(props: {
 
   const toggleworksheetMode = (e: any) => {
     if (editorView) {
-      editorView.focus();
       const tr2 = setWorksheetMode(
         schema,
         editorView.state.tr,

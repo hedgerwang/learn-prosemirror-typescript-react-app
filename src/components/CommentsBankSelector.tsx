@@ -98,7 +98,6 @@ export default function CommentsBankSelector(props: {
       if (!newText || !editorView) {
         return;
       }
-      editorView.focus();
       const tr = insertText(editorView.state.tr, newText);
       onTransaction(tr);
 

@@ -47,7 +47,6 @@ function handleDOMEvent(view: EditorView, evt: Event): boolean {
   const attrs = { ...node.attrs, checked: !node.attrs.checked };
   tr = tr.setNodeMarkup(pos, paragraphType, attrs, node.marks);
   tr = tr.setSelection(TextSelection.create(tr.doc, pos + 1));
-  view.focus();
   view.dispatch(tr);
   evt.preventDefault();
   return true;

@@ -38,8 +38,9 @@ export default function App() {
     (tr: Transaction) => {
       const state = applyTransaction(editorState, tr);
       setEditorState(state);
+      editorView && editorView.focus();
     },
-    [editorState, setEditorState]
+    [editorState, editorView, setEditorState]
   );
 
   useEffect(() => {

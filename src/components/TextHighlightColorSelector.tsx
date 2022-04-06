@@ -28,10 +28,9 @@ export default function TextHighlightColorSelector(props: {
         editorState.tr,
         color
       );
-      editorView && editorView.focus();
       onTransaction(tr);
     },
-    [editorView, editorState, onTransaction]
+    [editorState, onTransaction]
   );
 
   const onEyeDropperClick = useCallback(async () => {
