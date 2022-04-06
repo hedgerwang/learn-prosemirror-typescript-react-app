@@ -16,10 +16,11 @@ export default function createEditorPlugins(): Array<Plugin> {
     commentsBankMenuPlugin(),
     //
     history(),
-    //
-    keymap(baseKeymap),
+    // keymap(createEditorKeyMap()),
     //
     keymap(createEditorKeyMap()),
+    keymap(baseKeymap),
+    //
     //
     textCaretPlugin(),
     //

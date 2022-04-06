@@ -17,18 +17,15 @@ function insertInputSectionAt(
   const paragraphType = schema.nodes.paragraph;
 
   const frag = Fragment.from([
+    paragraphType.create({}, schema.text(" ")),
     inputSectionType.create(
       {},
-      Fragment.from([
-        paragraphType.create({}, schema.text(" ")),
-        paragraphType.create({}, schema.text(" ")),
-        paragraphType.create({}, schema.text(" ")),
-      ])
+      Fragment.from([paragraphType.create({}, schema.text(" "))])
     ),
     paragraphType.create({}, schema.text(" ")),
   ]);
   tr = tr.insert(pos, frag);
-  const sel = TextSelection.create(tr.doc, pos + 3);
+  const sel = TextSelection.create(tr.doc, pos + 4);
   tr = tr.setSelection(sel);
   return tr;
 }

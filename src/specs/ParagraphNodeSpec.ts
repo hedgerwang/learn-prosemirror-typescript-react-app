@@ -33,7 +33,7 @@ const ParagraphNodeSpec: NodeSpec = {
   toDOM: (node: Node) => {
     const { appearance, checked } = node.attrs;
     const divAttrs = {
-      class: "my-2 flex",
+      class: "my-2 flex border-b",
     };
 
     const dom: any = ["div", divAttrs];
