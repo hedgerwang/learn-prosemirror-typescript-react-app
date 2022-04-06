@@ -18,6 +18,33 @@ export default function TextHighlightColorSelector(props: {
   const { editorState, editorView, onTransaction } = props;
   const colorsCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const activeColor = useActiveTextHighlightColor(editorState);
+  const domWin: any = window;
+  const EyeDropper = domWin.EyeDropper;
+
+  const setColor = useCallback(
+    (color) => {
+      const tr = setTextHighlightColor(
+        editorState.schema,
+        editorState.tr,
+        color
+      );
+      editorView && editorView.focus();
+      onTransaction(tr);
+    },
+    [editorView, editorState, onTransaction]
+  );
+
+  const onEyeDropperClick = useCallback(async () => {
+    if (EyeDropper) {
+      let eyeDropper = new EyeDropper();
+      try {
+        const result = await eyeDropper.open();
+        setColor(result.sRGBHex);
+      } finally {
+        eyeDropper = null;
+      }
+    }
+  }, [setColor, EyeDropper]);
 
   useEffect(() => {
     const colors = colorsCanvasRef.current;
@@ -38,33 +65,32 @@ export default function TextHighlightColorSelector(props: {
       const [x, y] = getEventOffset(event);
       const [rr, gg, bb] = Array.from(ctx.getImageData(x, y, 1, 1).data);
       const color = `rgb(${rr},${gg},${bb})`;
-      const tr = setTextHighlightColor(
-        editorState.schema,
-        editorState.tr,
-        color
-      );
-      onTransaction(tr);
-      editorView && editorView.focus();
+      setColor(color);
     },
-    [editorState, editorView, onTransaction]
+    [setColor]
   );
 
   return (
-    <div className="bg-white border border-1 my-2 rounded-md shadow-sm overflow-hidden">
-      <label className="block">
+    <div className="bg-white border border-1 focus-within:outline-black my-2 overflow-hidden rounded-md shadow-sm">
+      <label className="block flex flex-col">
         <span className="block font-bold px-2 py-2 bg-gray-800">
-          <span
+          <button
             className="align-middle border-1 h-5 inline-block mx-2 rounded-full shadow w-5"
             style={{ backgroundColor: activeColor }}
+            onClick={onEyeDropperClick}
+            disabled={!EyeDropper}
           />
           <span className="text-white">highlight color</span>
         </span>
 
         <button
-          className="rounded-br rounded-bl overflow-hidden border-t block"
+          className="outline-none rounded-br rounded-bl overflow-hidden border-t block"
           onClick={onClick}
         >
-          <canvas className="block cursor-crosshair" ref={colorsCanvasRef} />
+          <canvas
+            className="outline-none block cursor-crosshair"
+            ref={colorsCanvasRef}
+          />
         </button>
       </label>
     </div>

@@ -1,6 +1,6 @@
 // @flow
 
-import { Plugin } from "prosemirror-state";
+import { Plugin, TextSelection } from "prosemirror-state";
 import EditorViewPlugin from "./EditorViewPlugin";
 import { EditorView } from "prosemirror-view";
 import { findParentNode } from "prosemirror-utils";
@@ -21,7 +21,8 @@ function handleDOMEvent(view: EditorView, evt: Event): boolean {
 
   if (evt instanceof KeyboardEvent) {
     const { key } = evt;
-    if (key !== "Space" && key !== "Enter") {
+    console.log("space");
+    if (key !== " " && key !== "Enter") {
       // Only space or enter key could toggle checkbox.
       return false;
     }
@@ -36,15 +37,19 @@ function handleDOMEvent(view: EditorView, evt: Event): boolean {
   }
   let { tr } = view.state;
 
-  const pos = view.posAtDOM(target, 0) - 1;
-  const node = pos > 1 ? tr.doc.nodeAt(pos) : null;
+  const pos = Math.max(view.posAtDOM(target, 0) - 1, 0);
+  const node = tr.doc.nodeAt(pos);
+
   if (node?.type !== paragraphType) {
     return false;
   }
 
   const attrs = { ...node.attrs, checked: !node.attrs.checked };
   tr = tr.setNodeMarkup(pos, paragraphType, attrs, node.marks);
+  tr = tr.setSelection(TextSelection.create(tr.doc, pos + 1));
+  view.focus();
   view.dispatch(tr);
+  evt.preventDefault();
   return true;
 }
 
@@ -52,7 +57,7 @@ export default function paragraphCheckboxPlugin(): Plugin {
   const plugin = new EditorViewPlugin({
     props: {
       handleDOMEvents: {
-        click: handleDOMEvent,
+        mousedown: handleDOMEvent,
         keydown: handleDOMEvent,
       },
     },
