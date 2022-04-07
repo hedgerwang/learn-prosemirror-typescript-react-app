@@ -61,6 +61,7 @@ export default function textCaretPlugin(): Plugin {
         } else {
           // Editor lost focus.
           const { selection } = tr;
+          console.log(">selection", selection);
           if (selection instanceof TextSelection) {
             // Show text caret.
             const { to } = selection;
@@ -68,6 +69,8 @@ export default function textCaretPlugin(): Plugin {
               type: DECO_TYPE,
             });
             set = set.add(tr.doc, [newDeco]);
+          } else {
+            set = set.remove(decos);
           }
         }
 
