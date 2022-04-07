@@ -80,12 +80,14 @@ export default function textCaretPlugin(): Plugin {
       },
       handleDOMEvents: {
         focus(view: EditorView) {
+          console.log("focus");
           const { blurTimer } = plugin;
           plugin.editorView = view;
           blurTimer && window.clearTimeout(blurTimer);
           return false;
         },
         blur(view: EditorView) {
+          console.log("blur");
           const { blurTimer } = plugin;
           blurTimer && window.clearTimeout(blurTimer);
           plugin.editorView = view;

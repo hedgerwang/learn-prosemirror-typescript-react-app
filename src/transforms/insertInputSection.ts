@@ -59,7 +59,7 @@ function insertInputSectionAfter(
 
   tr = tr.setSelection(TextSelection.create(tr.doc, sectionPos + 3));
 
-  if (tr.doc.nodeAt(sectionPos + section.nodeSize)?.type !== paragraphType) {
+  if (!tr.doc.nodeAt(sectionPos + section.nodeSize)) {
     // Need an empty paragraph after the section.
     tr = tr.insert(sectionPos + section.nodeSize, paragraph());
   }

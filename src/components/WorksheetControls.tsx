@@ -31,7 +31,7 @@ export default function WorksheetControls(props: {
   const { schema } = editorState;
   const worksheetMode = !!editorState.doc.attrs.worksheetMode;
   const tr = insertInputSection(schema, editorState.tr, true);
-  const disabled = !tr.getMeta("ok") && !tr.docChanged;
+  const disabled = (!tr.getMeta("ok") && !tr.docChanged) || worksheetMode;
 
   const onInsertInputSection = () => {
     if (editorView) {
