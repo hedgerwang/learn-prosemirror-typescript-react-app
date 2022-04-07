@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/learn-prosemirror-typescript-react-app/static/js/main.589b118f.js",
+    "main.js": "/learn-prosemirror-typescript-react-app/static/js/main.f914e10b.js",
     "static/js/787.7a54c5bc.chunk.js": "/learn-prosemirror-typescript-react-app/static/js/787.7a54c5bc.chunk.js",
     "index.html": "/learn-prosemirror-typescript-react-app/index.html",
-    "main.589b118f.js.map": "/learn-prosemirror-typescript-react-app/static/js/main.589b118f.js.map",
+    "main.f914e10b.js.map": "/learn-prosemirror-typescript-react-app/static/js/main.f914e10b.js.map",
     "787.7a54c5bc.chunk.js.map": "/learn-prosemirror-typescript-react-app/static/js/787.7a54c5bc.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.589b118f.js"
+    "static/js/main.f914e10b.js"
   ]
 }
