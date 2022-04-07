@@ -4,34 +4,6 @@ import { Schema, NodeType } from "prosemirror-model";
 import { Transaction, TextSelection } from "prosemirror-state";
 import { findParentNode, NodeWithPos } from "prosemirror-utils";
 
-function selectNextSiblingNode(tr: Transaction): Transaction {
-  const pos = tr.selection.to;
-  const position = tr.doc.resolve(pos);
-  const startPos = position.start(position.depth);
-  if (startPos === 0) {
-    // This is the root node.
-    debugger;
-    return tr;
-  }
-  const parentPos = startPos - 1;
-  const parentNode = tr.doc.nodeAt(parentPos);
-  if (!parentNode) {
-    debugger;
-    return tr;
-  }
-  const index = position.index(position.depth);
-  const lastIndex = parentNode.childCount - 1;
-  if (index >= lastIndex) {
-    // There's no following sibling node.
-    debugger;
-    return tr;
-  }
-  let nextIndex = index + 1;
-  let nextPos = position.posAtIndex(nextIndex, position.depth);
-  tr = tr.setSelection(TextSelection.create(tr.doc, nextPos));
-  return tr;
-}
-
 function insertInputSectionAfter(
   schema: Schema,
   tr: Transaction,

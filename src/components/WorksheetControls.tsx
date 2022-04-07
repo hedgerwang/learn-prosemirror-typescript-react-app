@@ -5,6 +5,7 @@ import { BUTTON, BUTTON_DISABLED } from "./styles";
 import cx from "classnames";
 import insertInputSection from "../transforms/insertInputSection";
 import setWorksheetMode from "../transforms/setWorksheetMode";
+import insertInputLine from "../transforms/insertInputLine";
 
 function isValidWorksheet(state: EditorState): boolean {
   const { inputSection } = state.schema.nodes;
@@ -36,6 +37,13 @@ export default function WorksheetControls(props: {
   const onInsertInputSection = () => {
     if (editorView) {
       const tr2 = insertInputSection(schema, editorState.tr);
+      onTransaction(tr2);
+    }
+  };
+
+  const onInsertInputLine = () => {
+    if (editorView) {
+      const tr2 = insertInputLine(schema, editorState.tr);
       onTransaction(tr2);
     }
   };
@@ -77,6 +85,12 @@ export default function WorksheetControls(props: {
         disabled={disabled}
       >
         Add text block
+      </button>
+      <button
+        className={cx(BUTTON, { [BUTTON_DISABLED]: disabled })}
+        onClick={onInsertInputLine}
+      >
+        Add inline block
       </button>
     </div>
   );
