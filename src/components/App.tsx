@@ -36,9 +36,9 @@ export default function App() {
 
   const onTransaction = useCallback(
     (tr: Transaction) => {
+      editorView && editorView.focus();
       const state = applyTransaction(editorState, tr);
       setEditorState(state);
-      editorView && editorView.focus();
     },
     [editorState, editorView, setEditorState]
   );
