@@ -1,6 +1,6 @@
 // @flow
 
-import { Schema, NodeType } from "prosemirror-model";
+import { Schema } from "prosemirror-model";
 import { Transaction, TextSelection } from "prosemirror-state";
 import { findParentNode, NodeWithPos } from "prosemirror-utils";
 
@@ -29,7 +29,7 @@ function insertInputSectionAfter(
     return !sectionPos;
   });
 
-  tr = tr.setSelection(TextSelection.create(tr.doc, sectionPos + 3));
+  // tr = tr.setSelection(TextSelection.create(tr.doc, sectionPos + 3));
 
   if (!tr.doc.nodeAt(sectionPos + section.nodeSize)) {
     // Need an empty paragraph after the section.
@@ -55,8 +55,8 @@ export default function insertInputSection(
   if (!(selection instanceof TextSelection)) {
     return tr;
   }
-  const { from, to } = selection;
 
+  const { from, to } = selection;
   if (from !== to) {
     return tr;
   }
@@ -66,8 +66,7 @@ export default function insertInputSection(
   })(selection);
 
   if (atInputSection) {
-    const { pos, node } = atInputSection;
-    tr = tr.setSelection(TextSelection.create(tr.doc, pos + node.nodeSize + 1));
+    return tr;
   }
 
   const atBlock = findParentNode((node) => {
@@ -76,9 +75,18 @@ export default function insertInputSection(
     return type === heading || type === paragraph;
   })(selection);
 
-  if (atBlock) {
-    return insertInputSectionAfter(schema, tr, atBlock, dryrun);
+  if (!atBlock) {
+    return tr;
   }
+
+  const paragraph = () => paragraphType.create({}, schema.text(" "));
+  const nodeAfter = tr.doc.nodeAt(to + 1);
+  if (nodeAfter?.type !== paragraphType) {
+    tr = tr.insert(to, paragraph());
+  }
+
+  const section = inputSectionType.create({}, paragraph());
+  tr = tr.insert(to, section);
 
   return tr;
 }

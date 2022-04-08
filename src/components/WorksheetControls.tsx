@@ -86,6 +86,7 @@ export default function WorksheetControls(props: {
       >
         Add text block
       </button>
+      <div className="h-px" />
       <button
         className={cx(BUTTON, { [BUTTON_DISABLED]: disabled })}
         onClick={onInsertInputLine}
