@@ -3,7 +3,9 @@
 import { EditorState, Transaction } from "prosemirror-state";
 import { EditorView } from "prosemirror-view";
 import { useEffect, useRef } from "react";
-import applyDevTools from "prosemirror-dev-tools";
+import { Node } from "prosemirror-model";
+import InputLineNodeView from "../views/InputLineNodeView";
+// import applyDevTools from "prosemirror-dev-tools";
 
 type Props = {
   editorState: EditorState;
@@ -31,6 +33,11 @@ export default function EditableArea(props: Props) {
       const editorView = new EditorView(element, {
         dispatchTransaction: (tr) => onTransactionRef.current(tr),
         state: editorStateRef.current,
+        nodeViews: {
+          inputLine(node: Node, view: EditorView, getPos: () => number) {
+            return new InputLineNodeView(node, view, getPos);
+          },
+        },
       });
 
       editorViewRef.current = editorView;

@@ -21,7 +21,6 @@ function handleDOMEvent(view: EditorView, evt: Event): boolean {
 
   if (evt instanceof KeyboardEvent) {
     const { key } = evt;
-    console.log("space");
     if (key !== " " && key !== "Enter") {
       // Only space or enter key could toggle checkbox.
       return false;

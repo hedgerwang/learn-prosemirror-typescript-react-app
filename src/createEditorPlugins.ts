@@ -9,7 +9,6 @@ import createInputRules from "./createInputRules";
 import editorActionMenuPlugin from "./plugins/editorActionMenuPlugin";
 import commentsBankMenuPlugin from "./plugins/commentsBankMenuPlugin";
 import paragraphCheckboxPlugin from "./plugins/paragraphCheckboxPlugin";
-import inputLinePlugin from "./plugins/inputLinePlugin";
 
 export default function createEditorPlugins(): Array<Plugin> {
   return [
@@ -31,6 +30,5 @@ export default function createEditorPlugins(): Array<Plugin> {
     //
     paragraphCheckboxPlugin(),
     //
-    inputLinePlugin(),
   ];
 }

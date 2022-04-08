@@ -61,7 +61,6 @@ export default function textCaretPlugin(): Plugin {
         } else {
           // Editor lost focus.
           const { selection } = tr;
-          console.log(">selection", selection);
           if (selection instanceof TextSelection) {
             // Show text caret.
             const { to } = selection;

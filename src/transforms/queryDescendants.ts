@@ -12,7 +12,6 @@ export default function queryDescendants(
   let check: Predict | null = null;
   if (condition instanceof NodeType) {
     const nodeType = condition;
-    console.log(nodeType);
     check = (nn) => nn.type === nodeType;
   } else if (typeof condition === "function") {
     check = condition;
